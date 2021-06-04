@@ -62,7 +62,7 @@
                             <li>
                                 <span class="ion-pricetag"></span>
                                 {% for category in object.category.all %}
-                                    <a>{{ category.name }}</a>
+                                <a>{{ category.name }}</a>
                                 {% endfor %}
                             </li>
                             <li>
@@ -191,6 +191,15 @@
                 </div>
             </div>
             <div class="col-md-4">
+                {% if user.is_authenticated %}
+                    <div class="widget-sidebar widget-tags">
+                        <h5 class="sidebar-title">Actions</h5>
+                        <div class="sidebar-content">
+                            <a href="{% url 'post-update' object.id %}" class="btn btn-secondary bt-sm mb-1 mt-1">Update Post</a>
+                            <a href="{% url 'post-delete' object.id %}" class="btn btn-danger bt-sm mb-1 mt-1">Delete Post</a>
+                        </div>
+                    </div>
+                {% endif %}
                 <div class="widget-sidebar sidebar-search">
                     <h5 class="sidebar-title">Search</h5>
                     <div class="sidebar-content">

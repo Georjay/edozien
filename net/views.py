@@ -4,7 +4,8 @@ from django.views.generic import (
     ListView, 
     DetailView, 
     CreateView,
-    UpdateView
+    UpdateView,
+    DeleteView
 )
 from .models import Post, Category
 
@@ -17,6 +18,7 @@ class PostListView(ListView):
     template_name = 'net/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 6
 
 
 class PostDetailView(DetailView):
@@ -33,6 +35,7 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'body', 'image', 'category']
+    #uses the post_form.html
 
     def form_valid(self, form):
         #This assigns the current logged in user as the author before saving the post to avoid an integrity error
@@ -42,8 +45,14 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'body', 'image', 'category']
+    #uses the post_form.html
 
     def form_valid(self, form):
         #This assigns the current logged in user as the author before saving the post to avoid an integrity error
         form.instance.author = self.request.user 
         return super().form_valid(form)
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = '/'
+    #uses the post_confirm_delete.html
