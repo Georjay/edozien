@@ -13,7 +13,6 @@
     </button>
     <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
       <ul class="navbar-nav">
-        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
         </li>
@@ -21,35 +20,25 @@
           <a class="nav-link js-scroll" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="#blog">Posts</a>
+          <a class="nav-link js-scroll" href="#blog">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll" href="{% url 'events' %}">Events</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll" href="#contact">Contact</a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link js-scroll" href="#service">Admin</a>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'profile' %}">My Profile</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link js-scroll" href="#service">Admin</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link js-scroll" href="">Admin Panel</a>
           </li> -->
-        <li class="nav-item">
-          <a class="nav-link js-scroll" href="{% url 'profile' %}">My Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll" href="">Admin Panel</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link js-scroll active" href="#home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll" href="#blog">Posts</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll" href="#contact">Contact</a>
-        </li>
         {% endif %}
-
       </ul>
     </div>
   </div>
@@ -87,7 +76,7 @@
                 <div class="col-sm-6 col-md-7">
                   <div class="about-info">
                     <p><span class="title-s">Name: </span> <span>Chiké Frankie Edozien</span></p>
-                    <p><span class="title-s">Profile: </span> <span>Nigerian-American Writer and Journalist</span></p>
+                    <p><span class="title-s">Profile: </span> <span>Writer and Journalist</span></p>
                     <p><span class="title-s">Email: </span> <span>contact@example.com</span></p>
                     <p><span class="title-s">Phone: </span> <span>(617) 557-0089</span></p>
                   </div>
@@ -125,7 +114,7 @@
                   </h5>
                 </div>
                 <p class="lead">
-                  Chiké is a Nigerian-American writer and journalist. He is currently the Director of
+                  Chiké is a writer and journalist. He is currently the Director of
                   New York University, Accra.
                   He directed the New York University Journalism Institute's Ghana based ‘Reporting Africa’ program from
                   2008 to 2019.
@@ -527,7 +516,7 @@
       <div class="col-sm-12">
         <div class="title-box text-center">
           <h3 class="title-a">
-            Posts
+            Blog ({{ page_obj.paginator.count }})
           </h3>
           <!-- <p class="subtitle-a">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -548,15 +537,15 @@
           <div class="card-body">
             <div class="card-category-box">
               {% for category in post.category.all %}
-              <div class="card-category">
-                <h6 class="category">{{ category.name }}</h6>
-              </div>
+                <div class="card-category">
+                  <h6 class="category">{{ category.name }}</h6>
+                </div>
               {% endfor %}
             </div>
             <h3 class="card-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
-            <p class="card-description">
+            <!-- <p class="card-description">
               {{ post.body|truncatechars_html:100|safe }}
-            </p>
+            </p> -->
           </div>
           <div class="card-footer">
             <div class="post-author">
@@ -574,21 +563,21 @@
     </div>
     {% if is_paginated %}
       {% if page_obj.has_previous %}
-        <a href="?page=1" class="btn btn-outline-primary">First</a>
-        <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        <a href="?page=1" class="btn btn-outline-primary btn-sm mt-2">First</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Previous</a>
       {% endif %}
 
       {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
-          <a href="?page={{ num }}" class="btn btn-primary">{{ num }}</a>
+          <a href="?page={{ num }}" class="btn btn-primary btn-sm mt-2">{{ num }}</a>
         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} 
-          <a href="?page={{ num }}" class="btn btn-outline-primary">{{ num }}</a>
+          <a href="?page={{ num }}" class="btn btn-outline-primary btn-sm mt-2">{{ num }}</a>
         {% endif %}
       {% endfor %}
 
         {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Next</a>
-          <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Last</a>
+          <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mt-2">Last</a>
         {% endif %}
     {% endif %}
   </div>
