@@ -64,3 +64,18 @@ class Event(models.Model):
     class Meta:
         verbose_name = "Event"
         verbose_name_plural = "Events"
+
+class Message(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    body = models.TextField()
+    subject = models.CharField(max_length=100)
+    is_read = models.BooleanField(default=False)
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.subject
+
+    class Meta:
+        verbose_name = "Message"
+        verbose_name_plural = "Messages"

@@ -30,14 +30,14 @@
         </li>
         {% if user.is_authenticated %}
           <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'inbox' %}">Inbox</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link js-scroll" href="{% url 'profile' %}">My Profile</a>
           </li>
           <li class="nav-item">
               <a class="nav-link js-scroll" href="#service">Admin</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link js-scroll" href="">Admin Panel</a>
-          </li> -->
         {% endif %}
       </ul>
     </div>
@@ -597,7 +597,7 @@
               <div class="col-md-6">
                 <div class="title-box-2">
                   <h5 class="title-left">
-                    Send Message Us
+                    Message Chiké
                   </h5>
                 </div>
                 <div>

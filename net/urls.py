@@ -10,6 +10,8 @@ from .views import (
     EventCreateView,
     EventUpdateView,
     EventDeleteView,
+    MessageListView,
+    MessageDetailView,
 )
 from . import views
 
@@ -24,4 +26,6 @@ urlpatterns = [
     path('event/create/', EventCreateView.as_view(), name='event-create'),
     path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event-update'),
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event-delete'),
+    path('inbox', MessageListView.as_view(), name='inbox'),
+    path('inbox/<int:pk>/', MessageDetailView.as_view(), name='inbox-detail'),
 ]

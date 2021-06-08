@@ -1,18 +1,22 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import create_postForm, create_eventForm
 from django.views.generic import (
     ListView, 
     DetailView, 
     CreateView,
     UpdateView,
     DeleteView
-)
-from .models import Post, PostCategory, Event, EventCategory
-from .forms import create_postForm, create_eventForm
+    )
+from .models import (
+    Post, 
+    PostCategory, 
+    Event, 
+    EventCategory, 
+    Message 
+    )
 
-def home(request):
-    template = 'net/home.html'
-    return render(request, template)
+
 
 class PostListView(ListView):
     model = Post
@@ -107,3 +111,14 @@ class EventDeleteView(LoginRequiredMixin, DeleteView):
     model = Event
     success_url = '/events/'
     #uses the event_confirm_delete.html
+
+class MessageListView(LoginRequiredMixin, ListView):
+    model = Message
+    template_name = 'net/inbox.html'
+    context_object_name = 'inbox'
+    ordering = ['is_read']
+    paginate_by = 20
+
+class MessageDetailView(LoginRequiredMixin, DetailView):
+    model = Message
+    template_name = 'net/inbox-detail.html'
