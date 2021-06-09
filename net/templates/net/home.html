@@ -471,7 +471,7 @@
 <!--/ Section Portfolio End /-->
 
 <!--/ Section Testimonials Star or Favourite Quotes /-->
-<div class="testimonials paralax-mf bg-image" style="background-image: url(img/overlay-bg.jpg)">
+<div class="testimonials paralax-mf bg-image" style="background-image: url({% static 'net/img/overlay-bg.jpg' %})">
   <div class="overlay-mf"></div>
   <div class="container">
     <div class="row">
@@ -522,6 +522,11 @@
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             </p> -->
           <div class="line-mf"></div>
+          {% if user.is_authenticated %}
+            <div>
+              <a href="{% url 'post-create' %}" class="btn btn-success bt-sm mb-1 mt-3">Add new post</a> 
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
