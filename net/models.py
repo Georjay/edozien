@@ -3,6 +3,7 @@ from ckeditor.fields import RichTextField
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from embed_video.fields import EmbedVideoField
 
 
 class PostCategory(models.Model):
@@ -79,3 +80,13 @@ class Message(models.Model):
     class Meta:
         verbose_name = "Message"
         verbose_name_plural = "Messages"
+
+class Video(models.Model):
+    video = EmbedVideoField()
+
+    def __str__(self):
+        return self.video
+
+    class Meta:
+        verbose_name = "Video"
+        verbose_name_plural = "Videos"

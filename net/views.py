@@ -13,7 +13,8 @@ from .models import (
     PostCategory, 
     Event, 
     EventCategory, 
-    Message 
+    Message,
+    Video
     )
 
 
@@ -114,7 +115,7 @@ class EventDeleteView(LoginRequiredMixin, DeleteView):
 
 class MessageListView(LoginRequiredMixin, ListView):
     model = Message
-    template_name = 'net/inbox.html'
+    template_name = 'net/about.html'
     context_object_name = 'inbox'
     ordering = ['is_read']
     paginate_by = 20
@@ -122,3 +123,8 @@ class MessageListView(LoginRequiredMixin, ListView):
 class MessageDetailView(LoginRequiredMixin, DetailView):
     model = Message
     template_name = 'net/inbox-detail.html'
+
+class BioListView(ListView):
+    model = Video
+    template_name = 'net/bio.html'
+    context_object_name = 'videos'

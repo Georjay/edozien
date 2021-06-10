@@ -12,6 +12,7 @@ from .views import (
     EventDeleteView,
     MessageListView,
     MessageDetailView,
+    BioListView,
 )
 from . import views
 
@@ -28,4 +29,5 @@ urlpatterns = [
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event-delete'),
     path('inbox', MessageListView.as_view(), name='inbox'),
     path('inbox/<int:pk>/', MessageDetailView.as_view(), name='inbox-detail'),
+    path('about/', BioListView.as_view(), name='about-me'),
 ]

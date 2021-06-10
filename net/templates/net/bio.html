@@ -1,0 +1,190 @@
+{% extends "net/base.html" %}
+{% load static %}
+{% load embed_video_tags %}
+
+{% block content %}
+<nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll" href="{% url 'home' %}">E D O Z I E N</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+            aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link js-scroll" href="{% url 'profile' %}">My Profile</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--/ Intro Skew Star /-->
+<div class="intro intro-single route bg-image" style="background-image: url({% static 'net/img/testimonial-2.jpg' %})">
+    <div class="overlay-mf"></div>
+    <div class="intro-content display-table">
+        <div class="table-cell">
+            <div class="container">
+                <h2 class="intro-title mb-4">About Chiké</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Intro Skew End /-->
+
+<!--/ Section Blog-Single Star /-->
+<section class="blog-wrapper sect-pt4" id="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-box">
+                    <div class="about-me pt-4 pt-md-0">
+                        <!-- <div class="title-box-2">
+                            <h5 class="title-left">
+                                About
+                            </h5>
+                        </div> -->
+                        <p class="lead text-justify">
+                            Chike Frankie Edozien began his journalism career reading the news bulletins at the Nigerian
+                            boarding school Federal Government College, Port Harcourt from 1981-1986. While studying for
+                            a journalism degree in New York, he was part of the BET News team that covered the 1992
+                            Democratic National convention that culminated in Bill Clinton’s nomination for president of
+                            the United States.
+                        </p>
+                        <p class="lead text-justify">
+                            A stint at ABC News soon followed and by the end of 1993 Edozien was hired at the New York
+                            Post, where he remained for 15 years and garnered several reporting awards. At the Post,
+                            Edozien’s coverage of the aftermath of the shooting death of Amadou Diallo was critically
+                            acclaimed.
+                            As was his coverage of HIV/AIDS and healthcare disparities in communities around the Big
+                            Apple. He was its City Hall Reporter from 1999-2008 and was the lead writer on legislative
+                            affairs.
+                        </p>
+                        <p class="lead text-justify">
+                            In 2008 he exposed a decades long secretive slush fund scheme that resulted in reforming the
+                            way the City Council doled out taxpayer funds and a federal investigation that saw several
+                            lawmakers jailed.
+                            He covered crime, courts, labor issues and human services public health and politics,
+                            reporting from around the country and abroad for the paper.
+                            In 2001, he co-founded the AFRican Magazine and continues to serve as the editor-in-chief.
+                            He has traveled around the world reporting on the impact of HIV/AIDS particularly among
+                            Africans and is a 2008 Kaiser Foundation fellow for Global Health Reporting. The result of
+                            that fellowship was a critical look at slice of healthcare outcomes in Uganda and how the
+                            rest of sub-Saharan Africa was learning from them.
+                        </p>
+                        <p class="lead text-justify">
+                            Edozien fully embraced digital platforms for doing journalism and was a founding blogger of
+                            the New York Times hyper-local Fort Greene blog. And routinely contributed international
+                            news and analysis to ‘Rendezvous’ the digital portal of the International Herald Tribune
+                            (now the International New York Times). The AFRican Magazine has had a digital component
+                            since its inception.
+                        </p>
+                        <p class="lead text-justify">
+                            He is a journalist who honed his skills writing about government, health and cultural issues
+                            for a variety of publications. His work has appeared in The Times (UK), Vibe magazine, Out
+                            Traveler, Blackaids.org, The Advocate, Colorlines, GlobalPost, Time Magazine & more. He has
+                            appeared several times on MSNBC giving context on issues affecting African countries.
+                        </p>
+                        <div class="text-center">
+                            <figure class="figure">
+                                <img src="{% static 'net/img/danrather.jpg' %}"
+                                    class="figure-img img-fluid rounded img-thumbnail"
+                                    alt="Frankie with broadcast news legend Dan Rather @ Arise TV studios.">
+                                <figcaption class="figure-caption text-right">Frankie with broadcast news legend Dan
+                                    Rather at Arise TV studios. 5/22/13</figcaption>
+                            </figure>
+                        </div>
+                        <p class="lead text-justify">
+                            Edozien was also a regular contributor to the Arise America news show on Arise TV. He
+                            provides context and analysis for the ‘Across Africa’ segment on the weekday broadcast.
+                            Arise TV is a global news channel that is currently seen on satellite Channel 519, Time
+                            Warner Cable 92 and Verizon channel 480.
+                        </p>
+                        <div class="text-center">
+                            <figure class="figure">
+                                <img src="{% static 'net/img/arise.jpg' %}"
+                                    class="figure-img img-fluid rounded img-thumbnail" alt=" ">
+                            </figure>
+                        </div>
+                        <p class="lead text-justify">
+                            Since 2008, Edozien has been the faculty director of New York University Journalism’s
+                            ‘Reporting Africa’ program. It is a unique summer intensive and immersion journalism program
+                            run out of Accra, Ghana that he developed — from the curriculum to onsite digital
+                            publishing. Many of the program’s alumni have gone on to work as full time journalists and
+                            even returned to Africa after this first taste on international journalism.
+                        </p>
+                        <div class="text-center mt-3 mb-3">
+                            {% for vid in videos %}
+                            {% video vid.video 'tiny' %}
+                            {% endfor %}
+                        </div>
+                        <p class="lead text-justify">
+                            Edozien is on the full time faculty at New York University as a clinical associate
+                            professor. He was named one of the Top 50 journalism professors for 2012 by
+                            Journalsimdegree.org. N.Y.U. is also his alma mater. In 2017 he was awarded the university’s
+                            prestigious Dr. Martin Luther King Jr. Faculty award for excellence in teaching,leadership,
+                            social justice and community building.
+                        </p>
+                        <p class="lead text-justify">
+                            He received a B.A. in Broadcast Journalism there in 1993.
+
+                            He is the author of ‘Lives of Great Men (Team Angelica 2017) which won the 2018 Lambda
+                            Literary prize for Best Gay Memoir/Biography.
+                        <div class="text-center">
+                            <figure class="figure">
+                                <img src="{% static 'net/img/lammy.jpg' %}" width="400" height="500"
+                                    class="figure-img img-fluid rounded"
+                                    alt="Lambda Literary prize for Best Gay Memoir/Biography">
+                                <figcaption class="figure-caption text-right">Lambda Literary Award</figcaption>
+                            </figure>
+                        </div>
+                        ‘Lives’ has also been shortlisted for the 2018 Gerald Kraak Award for gender sexuality and
+                        human rights writing and for the Randy Shilts Nonfiction prize for the Publishing Triangle.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <figure class="figure">
+                                    <img src="{% static 'net/img/lives-one.jpg' %}" width="400" height="500"
+                                        class="figure-img img-fluid rounded"
+                                        alt="Lambda Literary prize for Best Gay Memoir/Biography">
+                                    <!-- <figcaption class="figure-caption text-right">Lambda Literary Award</figcaption> -->
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure class="figure">
+                                    <img src="{% static 'net/img/lives-two.jpg' %}" width="400" height="500"
+                                        class="figure-img img-fluid rounded"
+                                        alt="Lambda Literary prize for Best Gay Memoir/Biography">
+                                    <!-- <figcaption class="figure-caption text-right">Lambda Literary Award</figcaption> -->
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure class="figure">
+                                    <img src="{% static 'net/img/lives-three.png' %}" width="400" height="500"
+                                        class="figure-img img-fluid rounded"
+                                        alt="Lambda Literary prize for Best Gay Memoir/Biography">
+                                    <!-- <figcaption class="figure-caption text-right">Lambda Literary Award</figcaption> -->
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Section Blog-Single End /-->
+
+<!--/ Section Contact-Footer Star /-->
+{% include 'net/footer.html' %}
+<!--/ Section Contact-footer End /-->
+
+{% endblock %}
