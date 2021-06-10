@@ -115,7 +115,7 @@ class EventDeleteView(LoginRequiredMixin, DeleteView):
 
 class MessageListView(LoginRequiredMixin, ListView):
     model = Message
-    template_name = 'net/about.html'
+    template_name = 'net/inbox.html'
     context_object_name = 'inbox'
     ordering = ['is_read']
     paginate_by = 20
