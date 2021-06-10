@@ -45,27 +45,32 @@
         <div class="row">
             <div class="col-md-8">
                 {% for event in events %}
-                <div class="post-box">
-                    <div class="post-meta">
-                        <h1 class="article-title"> <a href="{% url 'event-detail' event.id %}"> {{ event.title }}</a> </h1>
-                        <ul>
-                            <li>
-                                <span class="ion-ios-person"></span>
-                                <a>{{ event.author.first_name }} {{ event.author.last_name }}</a>
-                            </li>
-                            <li>
-                                <span class="ion-pricetag"></span>
-                                {% for category in event.category.all %}
-                                <a>{{ category.name }}</a>
-                                {% endfor %}
-                            </li>
-                            <li>
-                                <span class="ion-chatbox"></span>
-                                <a>{{ event.date_posted|date:"F d, Y"}}</a>
-                            </li>
-                        </ul>
+                    <div class="post-box">
+                        <div class="post-meta">
+                            <h1 class="article-title"> <a href="{% url 'event-detail' event.id %}"> {{ event.title }}</a> </h1>
+                            <ul>
+                                <li>
+                                    <span class="ion-ios-person"></span>
+                                    <a>{{ event.author.first_name }} {{ event.author.last_name }}</a>
+                                </li>
+                                <li>
+                                    <span class="ion-pricetag"></span>
+                                    {% for category in event.category.all %}
+                                    <a>{{ category.name }}</a>
+                                    {% endfor %}
+                                </li>
+                                <li>
+                                    <span class="ion-chatbox"></span>
+                                    <a>{{ event.date_posted|date:"F d, Y"}}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                {% empty %}
+                {% empty %}
+                    <div class="text-center">
+                        <span class="badge badge-secondary">No Events yet</span>
+                    </div>
                 {% endfor %}
                 {% if is_paginated %}
                     {% if page_obj.has_previous %}
