@@ -41,6 +41,21 @@
 <section class="blog-wrapper sect-pt4" id="blog">
     <div class="container">
         <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                    Unread Messages</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">{{ unread_messages }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="post-box">
                     <div class="table-responsive">
@@ -56,44 +71,47 @@
                             </thead>
                             <tbody>
                                 {% for message in inbox %}
-                                    {% if message.is_read %}
-                                    <tr>
-                                        {% else %}
-                                    <tr class="font-weight-bold">
-                                        {% endif %}
-                                        <td> {{ message.name }} </td>
-                                        <td> {{ message.email }} </td>
-                                        <td> {{ message.subject }} </td>
-                                        <td> {{ message.date_posted }} </td>
-                                        <td> <a href="{% url 'inbox-detail' message.id %}" class="btn btn-outline-primary btn-sm mt-1 mb-1"> Read </a> </td>
-                                    </tr>
+                                {% if message.is_read %}
+                                <tr>
+                                    {% else %}
+                                <tr class="font-weight-bold">
+                                    {% endif %}
+                                    <td> {{ message.name }} </td>
+                                    <td> {{ message.email }} </td>
+                                    <td> {{ message.subject }} </td>
+                                    <td> {{ message.date_posted }} </td>
+                                    <td> <a href="{% url 'inbox-detail' message.id %}"
+                                            class="btn btn-outline-primary btn-sm mt-1 mb-1"> Read </a> </td>
+                                </tr>
                                 {% empty %}
+                                <div class="col text-center">
                                     <span class="badge badge-danger mb-2">No messages yet</span>
+                                </div>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
-                {% if is_paginated %}
-                    {% if page_obj.has_previous %}
-                        <a href="?page=1" class="btn btn-outline-primary btn-sm">First</a>
-                        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm">Previous</a>
-                    {% endif %}
 
-                    {% for num in page_obj.paginator.page_range %}
-                        {% if page_obj.number == num %}
-                        <a href="?page={{ num }}" class="btn btn-primary btn-sm">{{ num }}</a>
-                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} 
-                        <a href="?page={{ num }}" class="btn btn-outline-primary btn-sm">{{ num }}</a>
-                        {% endif %}
+                {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-outline-primary btn-sm">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm">Previous</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <a href="?page={{ num }}" class="btn btn-primary btn-sm">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}"
+                    class="btn btn-outline-primary btn-sm">{{ num }}</a>
+                    {% endif %}
                     {% endfor %}
 
                     {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm">Next</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm">Last</a>
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm">Last</a>
                     {% endif %}
-                {% endif %}
+                    {% endif %}
             </div>
         </div>
     </div>

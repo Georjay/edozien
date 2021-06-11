@@ -120,6 +120,11 @@ class MessageListView(LoginRequiredMixin, ListView):
     ordering = ['is_read']
     paginate_by = 20
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['unread_messages'] = Message.objects.filter(is_read="False").count()
+        return context
+
 class MessageDetailView(LoginRequiredMixin, DetailView):
     # This method is written to make the .is_read field change from False to True.
     # Don't forget, this is still a class-based view

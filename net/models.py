@@ -78,8 +78,8 @@ class Message(models.Model):
         return self.subject
 
     class Meta:
-        verbose_name = "Message"
-        verbose_name_plural = "Messages"
+        verbose_name = "Inbox Message"
+        verbose_name_plural = "Inbox Messages"
 
 class Video(models.Model):
     video = EmbedVideoField()
