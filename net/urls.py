@@ -27,7 +27,7 @@ urlpatterns = [
     path('event/create/', EventCreateView.as_view(), name='event-create'),
     path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event-update'),
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event-delete'),
-    path('inbox', MessageListView.as_view(), name='inbox'),
+    path('inbox/', MessageListView.as_view(), name='inbox'),
     path('inbox/<int:pk>/', MessageDetailView.as_view(), name='inbox-detail'),
     path('about/', BioListView.as_view(), name='about-me'),
 ]

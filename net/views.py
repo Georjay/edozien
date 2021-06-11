@@ -14,7 +14,7 @@ from .models import (
     Event, 
     EventCategory, 
     Message,
-    Video
+    Video,
     )
 
 
@@ -121,8 +121,14 @@ class MessageListView(LoginRequiredMixin, ListView):
     paginate_by = 20
 
 class MessageDetailView(LoginRequiredMixin, DetailView):
-    model = Message
-    template_name = 'net/inbox-detail.html'
+    # This method is written to make the .is_read field change from False to True.
+    # Don't forget, this is still a class-based view
+    def get(self, request, pk):
+        message = Message.objects.get(id=pk)
+        message.is_read=True
+        message.save()
+        template = 'net/inbox-detail.html'
+        return render(request, template, locals())
 
 class BioListView(ListView):
     model = Video
