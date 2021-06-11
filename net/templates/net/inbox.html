@@ -98,9 +98,9 @@
                             <tbody>
                                 {% for message in inbox %}
                                 {% if message.is_read %}
-                                <tr>
+                                <tr class="text-secondary">
                                     {% else %}
-                                <tr class="font-weight-bold text-light bg-dark">
+                                <tr class="font-weight-bold text-success">
                                     {% endif %}
                                     <td> {{ message.name }} </td>
                                     <td> {{ message.email }} </td>
