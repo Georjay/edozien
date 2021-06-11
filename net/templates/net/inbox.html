@@ -41,14 +41,40 @@
 <section class="blog-wrapper sect-pt4" id="blog">
     <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card shadow h-100 py-2">
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Total Messages</div>
+                                <div class="h2 mb-0 font-weight-bold text-gray-800">{{ all_messages }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                     Unread Messages</div>
-                                <div class="h3 mb-0 font-weight-bold text-gray-800">{{ unread_messages }}</div>
+                                <div class="h2 mb-0 font-weight-bold text-gray-800">{{ unread_messages }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Read Messages</div>
+                                <div class="h2 mb-0 font-weight-bold text-gray-800">{{ read_messages }}</div>
                             </div>
                         </div>
                     </div>
@@ -74,14 +100,14 @@
                                 {% if message.is_read %}
                                 <tr>
                                     {% else %}
-                                <tr class="font-weight-bold">
+                                <tr class="font-weight-bold text-light bg-dark">
                                     {% endif %}
                                     <td> {{ message.name }} </td>
                                     <td> {{ message.email }} </td>
                                     <td> {{ message.subject }} </td>
                                     <td> {{ message.date_posted }} </td>
                                     <td> <a href="{% url 'inbox-detail' message.id %}"
-                                            class="btn btn-outline-primary btn-sm mt-1 mb-1"> Read </a> </td>
+                                            class="btn btn-outline-primary btn-sm"> Read </a> </td>
                                 </tr>
                                 {% empty %}
                                 <div class="col text-center">

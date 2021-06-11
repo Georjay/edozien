@@ -122,7 +122,10 @@ class MessageListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['unread_messages'] = Message.objects.filter(is_read="False").count()
+        inbox_messages = Message.objects.all()
+        context ['all_messages'] = inbox_messages.count()
+        context ['unread_messages'] = inbox_messages.filter(is_read="False").count()
+        context ['read_messages'] = inbox_messages.filter(is_read="True").count()
         return context
 
 class MessageDetailView(LoginRequiredMixin, DetailView):
