@@ -47,7 +47,8 @@
                 {% for event in events %}
                     <div class="post-box">
                         <div class="post-meta">
-                            <h1 class="article-title"> <a href="{% url 'event-detail' event.id %}"> {{ event.title }}</a> </h1>
+                            <h1 class="article-title"> <a href="{% url 'event-detail' event.id %}"> {{ event.title }}</a>
+                            </h1>
                             <ul>
                                 <li>
                                     <span class="ion-ios-person"></span>
@@ -67,30 +68,30 @@
                         </div>
                     </div>
                 {% empty %}
-                {% empty %}
                     <div class="text-center">
                         <span class="badge badge-secondary">No Events yet</span>
                     </div>
                 {% endfor %}
-                {% if is_paginated %}
-                    {% if page_obj.has_previous %}
-                        <a href="?page=1" class="btn btn-outline-primary btn-sm">First</a>
-                        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm">Previous</a>
-                    {% endif %}
 
-                    {% for num in page_obj.paginator.page_range %}
-                        {% if page_obj.number == num %}
-                        <a href="?page={{ num }}" class="btn btn-primary btn-sm">{{ num }}</a>
-                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} 
-                        <a href="?page={{ num }}" class="btn btn-outline-primary btn-sm">{{ num }}</a>
-                        {% endif %}
+                {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-outline-primary btn-sm">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm">Previous</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <a href="?page={{ num }}" class="btn btn-primary btn-sm">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}"
+                    class="btn btn-outline-primary btn-sm">{{ num }}</a>
+                    {% endif %}
                     {% endfor %}
 
                     {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm">Next</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm">Last</a>
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm">Last</a>
                     {% endif %}
-                {% endif %}
+                    {% endif %}
             </div>
             <div class="col-md-4">
                 {% if user.is_authenticated %}
