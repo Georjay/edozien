@@ -519,79 +519,54 @@
       <div class="col-sm-12">
         <div class="title-box text-center">
           <h3 class="title-a">
-            Blog ({{ page_obj.paginator.count }})
+            Blog
           </h3>
-          <!-- <p class="subtitle-a">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            </p> -->
           <div class="line-mf"></div>
-          {% if user.is_authenticated %}
-          <div>
-            <a href="{% url 'post-create' %}" class="btn btn-success bt-sm mb-1 mt-3">Add new post</a>
-          </div>
-          {% endif %}
+          <p class="subtitle-a">
+            <a href="{% url 'blog-posts' %}" class="btn btn-outline-primary btn-sm mb-1 mt-3">All Blog Posts</a>
+          </p>
         </div>
       </div>
     </div>
-
     <div class="row">
       {% for post in posts %}
       <!-- <div class="col-md-4 card-deck"> -->
-        <div class="col-md-4">
-          <div class="card card-blog">
-            <div class="card-img">
-              <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt="" class="img-fluid"></a>
-            </div>
-            <div class="card-body">
-              <div class="card-category-box">
-                {% for category in post.category.all %}
-                <div class="card-category">
-                  <h6 class="category">{{ category.name }}</h6>
-                </div>
-                {% endfor %}
+      <div class="col-md-4">
+        <div class="card card-blog">
+          <div class="card-img">
+            <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt="" class="img-fluid"></a>
+          </div>
+          <div class="card-body">
+            <div class="card-category-box">
+              {% for category in post.category.all %}
+              <div class="card-category">
+                <h6 class="category">{{ category.name }}</h6>
               </div>
-              <h3 class="card-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
-              <!-- <p class="card-description">
+              {% endfor %}
+            </div>
+            <h3 class="card-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+            <!-- <p class="card-description">
                   {{ post.body|truncatechars_html:100|safe }}
                 </p> -->
+          </div>
+          <div class="card-footer">
+            <div class="post-author">
+              <img src="{{ post.author.profile.image.url }}" alt="" class="avatar rounded-circle">
+              <span class="author text-muted">{{ post.author }}</span>
             </div>
-            <div class="card-footer">
-              <div class="post-author">
-                <img src="{{ post.author.profile.image.url }}" alt="" class="avatar rounded-circle">
-                <span class="author text-muted">{{ post.author }}</span>
-              </div>
-              <div class="post-date text-muted">
-                <span class="ion-ios-calendar-outline"></span>
-                <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}</small>
-              </div>
+            <div class="post-date text-muted">
+              <span class="ion-ios-calendar-outline"></span>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}</small>
             </div>
           </div>
         </div>
+      </div>
       {% empty %}
-        <div class="col text-center">
-          <span class="badge badge-secondary">No Blog Posts yet</span>
-        </div>
+      <div class="text-center">
+        <span class="badge badge-secondary">No Blog Posts yet</span>
+      </div>
       {% endfor %}
     </div>
-    {% if is_paginated %}
-    {% if page_obj.has_previous %}
-    <a href="?page=1" class="btn btn-outline-primary btn-sm mt-2">First</a>
-    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Previous</a>
-    {% endif %}
-
-    {% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}
-    <a href="?page={{ num }}" class="btn btn-primary btn-sm mt-2">{{ num }}</a>
-    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}"
-      class="btn btn-outline-primary btn-sm mt-2">{{ num }}</a>
-      {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Next</a>
-      <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mt-2">Last</a>
-      {% endif %}
-      {% endif %}
   </div>
 </section>
 <!--/ Section Blog End /-->
@@ -612,37 +587,31 @@
                     Message Chiké
                   </h5>
                 </div>
+
                 <div>
-                  <form action="" method="post" role="form" class="contactForm">
-                    <div id="sendmessage">Your message has been sent. Thank you!</div>
-                    <div id="errormessage"></div>
+                  <form action="" method="POST">
+                    {% csrf_token %}
+                    <!-- <div id="sendmessage">Your message has been sent. Thank you!</div>
+                    <div id="errormessage"></div> -->
                     <div class="row">
                       <div class="col-md-12 mb-3">
                         <div class="form-group">
-                          <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                            data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                          <div class="validation"></div>
+                          <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" />
                         </div>
                       </div>
                       <div class="col-md-12 mb-3">
                         <div class="form-group">
-                          <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
-                            data-rule="email" data-msg="Please enter a valid email" />
-                          <div class="validation"></div>
+                          <input type="email" class="form-control" name="email" placeholder="Your Email" />
                         </div>
                       </div>
                       <div class="col-md-12 mb-3">
                         <div class="form-group">
-                          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                            data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                          <div class="validation"></div>
+                          <input type="text" class="form-control" name="subject" placeholder="Subject" />
                         </div>
                       </div>
                       <div class="col-md-12 mb-3">
                         <div class="form-group">
-                          <textarea class="form-control" name="message" rows="5" data-rule="required"
-                            data-msg="Please write something for us" placeholder="Message"></textarea>
-                          <div class="validation"></div>
+                          <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
                         </div>
                       </div>
                       <div class="col-md-12">
@@ -651,6 +620,7 @@
                     </div>
                   </form>
                 </div>
+                
               </div>
               <div class="col-md-6">
                 <div class="title-box-2 pt-4 pt-md-0">

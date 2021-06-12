@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import create_postForm, create_eventForm
+from django.contrib import messages
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -18,13 +19,39 @@ from .models import (
     )
 
 
+def home(request):
+    posts = Post.objects.order_by('-date_posted')[:3]
+
+    if request.method == "POST":
+        data = request.POST
+
+        # New way of sendind data from the front-end into the database
+        form = Message.objects.create(
+            name = data['name'],
+            email = data['email'],
+            subject = data['subject'],
+            body = data['message']
+        )
+    context = {
+        'posts': posts
+    }
+    template = 'net/home.html'
+
+    return render(request,  template, context)
+
 
 class PostListView(ListView):
     model = Post
-    template_name = 'net/home.html'
+    template_name = 'net/blog-post.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 6
+    paginate_by = 15
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context ['recent_posts'] = Post.objects.order_by('-date_posted')[:5]
+        context ['all_categories'] = PostCategory.objects.all()
+        return context
 
 
 class PostDetailView(DetailView):
