@@ -42,71 +42,71 @@
 <!--/ Section Blog-Single Star /-->
 <section class="blog-wrapper sect-pt4">
     <div class="container">
-        <div class="mb-5 mt-1">
+        <!-- <div class="mb-5 mt-1">
             {% for category in all_categories %}
                 <a class="btn btn-outline-dark" href="{% url 'blog-posts' %}?category={{ category.name }}">{{ category.name }}</a>
             {% endfor %}
-        </div>
-    <div class="row">
-        {% for post in posts %}
-        <!-- <div class="col-md-4 card-deck"> -->
-        <div class="col-md-4">
-            <div class="card card-blog">
-                <div class="card-img">
-                    <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt=""
-                            class="img-fluid"></a>
-                </div>
-                <div class="card-body">
-                    <div class="card-category-box">
-                        {% for category in post.category.all %}
-                        <div class="card-category">
-                            <h6 class="category">{{ category.name }}</h6>
-                        </div>
-                        {% endfor %}
+        </div> -->
+        <div class="row">
+            {% for post in posts %}
+            <!-- <div class="col-md-4 card-deck"> -->
+            <div class="col-md-4">
+                <div class="card card-blog">
+                    <div class="card-img">
+                        <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt=""
+                                class="img-fluid"></a>
                     </div>
-                    <h3 class="card-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
-                    <!-- <p class="card-description">
+                    <div class="card-body">
+                        <div class="card-category-box">
+                            {% for category in post.category.all %}
+                            <div class="card-category">
+                                <h6 class="category">{{ category.name }}</h6>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <h3 class="card-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+                        <!-- <p class="card-description">
                         {{ post.body|truncatechars_html:100|safe }}
                       </p> -->
-                </div>
-                <div class="card-footer">
-                    <div class="post-author">
-                        <img src="{{ post.author.profile.image.url }}" alt="" class="avatar rounded-circle">
-                        <span class="author text-muted">{{ post.author }}</span>
                     </div>
-                    <div class="post-date text-muted">
-                        <span class="ion-ios-calendar-outline"></span>
-                        <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}</small>
+                    <div class="card-footer">
+                        <div class="post-author">
+                            <img src="{{ post.author.profile.image.url }}" alt="" class="avatar rounded-circle">
+                            <span class="author text-muted">{{ post.author }}</span>
+                        </div>
+                        <div class="post-date text-muted">
+                            <span class="ion-ios-calendar-outline"></span>
+                            <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}</small>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% empty %}
+            <div class="text-center">
+                <span class="badge badge-secondary">No Blog Posts yet</span>
+            </div>
+            {% endfor %}
         </div>
-        {% empty %}
-        <div class="text-center">
-            <span class="badge badge-secondary">No Blog Posts yet</span>
-        </div>
-        {% endfor %}
+        {% if is_paginated %}
+        {% if page_obj.has_previous %}
+        <a href="?page=1" class="btn btn-outline-primary btn-sm mt-2">First</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a href="?page={{ num }}" class="btn btn-primary btn-sm mt-2">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}"
+            class="btn btn-outline-primary btn-sm mt-2">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mt-2">Last</a>
+            {% endif %}
+            {% endif %}
     </div>
-    {% if is_paginated %}
-    {% if page_obj.has_previous %}
-    <a href="?page=1" class="btn btn-outline-primary btn-sm mt-2">First</a>
-    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Previous</a>
-    {% endif %}
-
-    {% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}
-    <a href="?page={{ num }}" class="btn btn-primary btn-sm mt-2">{{ num }}</a>
-    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}"
-        class="btn btn-outline-primary btn-sm mt-2">{{ num }}</a>
-        {% endif %}
-        {% endfor %}
-
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mt-2">Last</a>
-        {% endif %}
-        {% endif %}
-        </div>
 </section>
 <!--/ Section Blog-Single End /-->
 

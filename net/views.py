@@ -22,10 +22,10 @@ from .models import (
 def home(request):
     posts = Post.objects.order_by('-date_posted')[:3]
 
+    # New way of sendind data from the front-end into the database
     if request.method == "POST":
         data = request.POST
-
-        # New way of sendind data from the front-end into the database
+        
         form = Message.objects.create(
             name = data['name'],
             email = data['email'],

@@ -37,6 +37,11 @@
         <div class="table-cell">
             <div class="container">
                 <h2 class="intro-title mb-4">{{ object.title }}</h2>
+                <ol class="breadcrumb d-flex justify-content-center">
+                    <li class="breadcrumb-item active">
+                        <a href="{% url 'blog-posts' %}">&laquo; Back to Posts</a>
+                    </li>
+                </ol>
             </div>
         </div>
     </div>
@@ -79,9 +84,10 @@
                 </div>
                 <div class="box-comments">
                     <div class="title-box-2">
-                        <h4 class="title-comments title-left">Comments (34)</h4>
+                        <h4 class="title-comments title-left">Comments</h4>
                     </div>
-                    <ul class="list-comments">
+                    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="" data-numposts="5"></div>
+                    <!-- <ul class="list-comments">
                         <li>
                             <div class="comment-avatar">
                                 <img src="img/testimonial-2.jpg" alt="">
@@ -149,9 +155,9 @@
                                 <a href="3">Reply</a>
                             </div>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
-                <div class="form-comments">
+                <!-- <div class="form-comments">
                     <div class="title-box-2">
                         <h3 class="title-left">
                             Leave a Reply
@@ -188,7 +194,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
             </div>
             <div class="col-md-4">
                 {% if user.is_authenticated %}

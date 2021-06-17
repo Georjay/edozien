@@ -114,6 +114,7 @@
                                     quae natus libero optio, at qui beatae ducimus placeat debitis voluptates amet
                                     corporis,
                                     veritatis deserunt.
+                                    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="" data-numposts="5"></div> 
                                 </p>
                                 <a href="3">Reply</a>
                             </div>
@@ -196,10 +197,8 @@
                 <div class="widget-sidebar widget-tags">
                     <h5 class="sidebar-title">Actions</h5>
                     <div class="sidebar-content">
-                        <a href="{% url 'event-update' object.id %}" class="btn btn-secondary bt-sm mb-1 mt-1">Update
-                            Event</a>
-                        <a href="{% url 'event-delete' object.id %}" class="btn btn-danger bt-sm mb-1 mt-1">Delete
-                            Event</a>
+                        <a href="{% url 'event-update' object.id %}" class="btn btn-secondary bt-sm mb-1 mt-1">Update Event</a>
+                        <a href="{% url 'event-delete' object.id %}" class="btn btn-danger bt-sm mb-1 mt-1">Delete Event</a>
                     </div>
                 </div>
                 {% endif %}
