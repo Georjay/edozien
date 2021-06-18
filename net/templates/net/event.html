@@ -14,13 +14,8 @@
         <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link js-scroll" href="{% url 'home' %}">Home Page</a>
                 </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link js-scroll" href="{% url 'profile' %}">My Profile</a>
-                </li>
-                {% endif %}
             </ul>
         </div>
     </div>

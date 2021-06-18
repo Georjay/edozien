@@ -13,18 +13,9 @@
         </button>
         <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
             <ul class="navbar-nav">
-                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link js-scroll active" href="{% url 'home' %}">Home Page</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll" href="{% url 'profile' %}">My Profile</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
-                </li>
-                {% endif %}
             </ul>
         </div>
     </div>
@@ -198,13 +189,15 @@
             </div>
             <div class="col-md-4">
                 {% if user.is_authenticated %}
-                    <div class="widget-sidebar widget-tags">
-                        <h5 class="sidebar-title">Actions</h5>
-                        <div class="sidebar-content">
-                            <a href="{% url 'post-update' object.id %}" class="btn btn-secondary bt-sm mb-1 mt-1">Update Post</a>
-                            <a href="{% url 'post-delete' object.id %}" class="btn btn-danger bt-sm mb-1 mt-1">Delete Post</a>
-                        </div>
+                <div class="widget-sidebar widget-tags">
+                    <h5 class="sidebar-title">Actions</h5>
+                    <div class="sidebar-content">
+                        <a href="{% url 'post-update' object.id %}" class="btn btn-secondary bt-sm mb-1 mt-1">Update
+                            Post</a>
+                        <a href="{% url 'post-delete' object.id %}" class="btn btn-danger bt-sm mb-1 mt-1">Delete
+                            Post</a>
                     </div>
+                </div>
                 {% endif %}
                 <div class="widget-sidebar sidebar-search">
                     <h5 class="sidebar-title">Search</h5>
@@ -278,9 +271,9 @@
 <section class="paralax-mf footer-paralax bg-image sect-mt4 route"
     style="background-image: url({% static 'net/img/overlay-bg.jpg' %})">
     <div class="overlay-mf"></div>
-    
+
     {% include 'net/footer.html' %}
-    
+
 </section>
 <!--/ Section Contact-footer End /-->
 {% endblock %}

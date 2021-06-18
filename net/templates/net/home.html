@@ -1,5 +1,6 @@
 {% extends "net/base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
@@ -20,10 +21,10 @@
           <a class="nav-link js-scroll" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="#blog">Blog</a>
+          <a class="nav-link js-scroll" href="#work">Events</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="{% url 'events' %}">Events</a>
+          <a class="nav-link js-scroll" href="#blog">Blog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll" href="#contact">Contact</a>
@@ -32,12 +33,12 @@
         <li class="nav-item">
           <a class="nav-link js-scroll" href="{% url 'inbox' %}">Inbox</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link js-scroll" href="{% url 'profile' %}">My Profile</a>
-        </li>
-        <li class="nav-item">
+        </li> -->
+        <!-- <li class="nav-item">
           <a class="nav-link js-scroll" href="#service">Admin</a>
-        </li>
+        </li> -->
         {% endif %}
       </ul>
     </div>
@@ -307,39 +308,39 @@
   </div> -->
 
 <!--/ Section Portfolio Star /-->
-<!-- <section id="work" class="portfolio-mf sect-pt4 route">
+<section id="work" class="portfolio-mf sect-pt4 route">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
         <div class="title-box text-center">
           <h3 class="title-a">
-            Portfolio
+            Events
           </h3>
-          <p class="subtitle-a">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          </p>
           <div class="line-mf"></div>
+          <p class="subtitle-a">
+            <a href="{% url 'events' %}" class="btn btn-outline-primary btn-sm mb-1 mt-3">All Events</a>
+          </p>
         </div>
       </div>
     </div>
     <div class="row">
+      {% for event in events %}
       <div class="col-md-4">
         <div class="work-box">
-          <a href="img/work-1.jpg" data-lightbox="gallery-mf">
+          <a href="{% url 'event-detail' event.id %}">
             <div class="work-img">
-              <img src="img/work-1.jpg" alt="" class="img-fluid">
+              <img src="{{ event.image.url }}" alt="" class="img-fluid">
             </div>
             <div class="work-content">
               <div class="row">
                 <div class="col-sm-8">
-                  <h2 class="w-title">Lorem impsum dolor</h2>
+                  <h2 class="w-title">{{ event.title }}</h2>
                   <div class="w-more">
-                    <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="w-like">
-                    <span class="ion-ios-plus-outline"></span>
+                    <!-- {% for category in event.category.all %}
+                      <span class="w-ctegory"> {{ category.name }}</span>
+                    {% endfor %} -->
+                    <span class="ion-ios-calendar-outline"></span>
+                    <span class="w-date">{{ event.date_posted|naturaltime }}</span>
                   </div>
                 </div>
               </div>
@@ -347,130 +348,14 @@
           </a>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="work-box">
-          <a href="img/work-2.jpg" data-lightbox="gallery-mf">
-            <div class="work-img">
-              <img src="img/work-2.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="work-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h2 class="w-title">Loreda Cuno Nere</h2>
-                  <div class="w-more">
-                    <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="w-like">
-                    <span class="ion-ios-plus-outline"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
+      {% empty %}
+      <div class="text-center">
+        <span class="badge badge-secondary">No Events yet</span>
       </div>
-      <div class="col-md-4">
-        <div class="work-box">
-          <a href="img/work-3.jpg" data-lightbox="gallery-mf">
-            <div class="work-img">
-              <img src="img/work-3.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="work-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h2 class="w-title">Mavrito Lana Dere</h2>
-                  <div class="w-more">
-                    <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="w-like">
-                    <span class="ion-ios-plus-outline"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="work-box">
-          <a href="img/work-4.jpg" data-lightbox="gallery-mf">
-            <div class="work-img">
-              <img src="img/work-4.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="work-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h2 class="w-title">Bindo Laro Cado</h2>
-                  <div class="w-more">
-                    <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="w-like">
-                    <span class="ion-ios-plus-outline"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="work-box">
-          <a href="img/work-5.jpg" data-lightbox="gallery-mf">
-            <div class="work-img">
-              <img src="img/work-5.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="work-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h2 class="w-title">Studio Lena Mado</h2>
-                  <div class="w-more">
-                    <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="w-like">
-                    <span class="ion-ios-plus-outline"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="work-box">
-          <a href="img/work-6.jpg" data-lightbox="gallery-mf">
-            <div class="work-img">
-              <img src="img/work-6.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="work-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h2 class="w-title">Studio Big Bang</h2>
-                  <div class="w-more">
-                    <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2017</span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="w-like">
-                    <span class="ion-ios-plus-outline"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
+      {% endfor %}
     </div>
   </div>
-</section> -->
+</section>
 <!--/ Section Portfolio End /-->
 
 <!--/ Section Testimonials Star or Favourite Quotes /-->
@@ -596,25 +481,27 @@
                     <div class="row">
                       <div class="col-md-12 mb-3">
                         <div class="form-group">
-                          <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required/>
+                          <input type="text" class="form-control" name="name" id="name" placeholder="Your Name"
+                            required />
                           <div class="validation"></div>
                         </div>
                       </div>
                       <div class="col-md-12 mb-3">
                         <div class="form-group">
-                          <input type="email" class="form-control" name="email" placeholder="Your Email" required/>
+                          <input type="email" class="form-control" name="email" placeholder="Your Email" required />
                           <div class="validation"></div>
                         </div>
                       </div>
                       <div class="col-md-12 mb-3">
                         <div class="form-group">
-                          <input type="text" class="form-control" name="subject" placeholder="Subject" required/>
+                          <input type="text" class="form-control" name="subject" placeholder="Subject" required />
                           <div class="validation"></div>
                         </div>
                       </div>
                       <div class="col-md-12 mb-3">
                         <div class="form-group">
-                          <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                          <textarea class="form-control" name="message" rows="5" placeholder="Message"
+                            required></textarea>
                         </div>
                         <div class="validation"></div>
                       </div>
@@ -624,7 +511,7 @@
                     </div>
                   </form>
                 </div>
-                
+
               </div>
               <div class="col-md-6">
                 <div class="title-box-2 pt-4 pt-md-0">

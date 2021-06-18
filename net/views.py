@@ -21,6 +21,7 @@ from .models import (
 
 def home(request):
     posts = Post.objects.order_by('-date_posted')[:3]
+    events = Event.objects.order_by('-date_posted')[:3]
 
     # New way of sendind data from the front-end into the database
     if request.method == "POST":
@@ -33,7 +34,8 @@ def home(request):
             body = data['message']
         )
     context = {
-        'posts': posts
+        'posts': posts,
+        'events': events,
     }
     template = 'net/home.html'
 
@@ -144,8 +146,8 @@ class MessageListView(LoginRequiredMixin, ListView):
     model = Message
     template_name = 'net/inbox.html'
     context_object_name = 'inbox'
-    ordering = ['is_read']
-    paginate_by = 20
+    ordering = ['-id']
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
