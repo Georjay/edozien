@@ -62,7 +62,8 @@
                                 {% endfor %}
                             </li>
                             <li>
-                                <span class="ion-chatbox"></span>
+                                <!-- <span class="ion-chatbox"></span> -->
+                                <span class="ion-ios-calendar-outline"></span>
                                 <a>{{ object.date_posted|date:"F d, Y"}}</a>
                             </li>
                         </ul>
@@ -77,8 +78,7 @@
                     <div class="title-box-2">
                         <h4 class="title-comments title-left">Comments</h4>
                     </div>
-                    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width=""
-                        data-numposts="5"></div>
+                    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="" data-numposts="5"></div>
                     <!-- <ul class="list-comments">
                         <li>
                             <div class="comment-avatar">
