@@ -1,5 +1,6 @@
 {% extends "net/base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
@@ -56,8 +57,8 @@
                                     {% endfor %}
                                 </li>
                                 <li>
-                                    <span class="ion-chatbox"></span>
-                                    <a>{{ event.date_posted|date:"F d, Y"}}</a>
+                                    <span class="ion-ios-calendar-outline"></span>
+                                    <a>{{ event.date_posted|naturaltime }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -93,7 +94,7 @@
                 <div class="widget-sidebar widget-tags">
                     <h5 class="sidebar-title">Actions</h5>
                     <div class="sidebar-content">
-                        <a href="{% url 'event-create' %}" class="btn btn-success bt-sm mb-1 mt-1">Add Event</a>
+                        <a href="{% url 'event-create' %}" class="btn btn-success btn-lg mb-1 mt-1">Add new Event</a>
                     </div>
                 </div>
                 {% endif %}

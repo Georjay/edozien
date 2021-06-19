@@ -42,6 +42,11 @@
                 <a class="btn btn-outline-dark" href="{% url 'blog-posts' %}?category={{ category.name }}">{{ category.name }}</a>
             {% endfor %}
         </div> -->
+        {% if user.is_authenticated %}
+            <div class="d-flex justify-content-end mb-4">
+                <a href="{% url 'post-create' %}" class="btn btn-success btn-lg">Add new Post</a>
+            </div>
+        {% endif %}
         <div class="row">
             {% for post in posts %}
             <!-- <div class="col-md-4 card-deck"> -->
@@ -101,7 +106,30 @@
             <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mt-2">Last</a>
             {% endif %}
             {% endif %}
+
     </div>
+    <!-- <div class="col-md-4">
+        {% if user.is_authenticated %}
+        <div class="widget-sidebar widget-tags">
+            <h5 class="sidebar-title">Actions</h5>
+            <div class="sidebar-content">
+                <a href="{% url 'post-create' %}" class="btn btn-success bt-sm mb-1 mt-1">Add new Post</a>
+            </div>
+        </div>
+        {% endif %} -->
+        <!-- <div class="widget-sidebar widget-tags">
+            <h5 class="sidebar-title">Categories</h5>
+            <div class="sidebar-content">
+                <ul>
+                    {% for category in event_categories %}
+                    <li>
+                        <a href="#">{{ category.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div> -->
+    <!-- </div> -->
 </section>
 <!--/ Section Blog-Single End /-->
 
