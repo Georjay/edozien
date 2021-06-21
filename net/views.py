@@ -22,6 +22,7 @@ from .models import (
 def home(request):
     posts = Post.objects.order_by('-date_posted')[:6]
     events = Event.objects.order_by('-date_posted')[:6]
+    unread_messages = Message.objects.filter(is_read="False").count()
 
     # New way of sendind data from the front-end into the database
     if request.method == "POST":
@@ -38,6 +39,7 @@ def home(request):
     context = {
         'posts': posts,
         'events': events,
+        'unread_messages': unread_messages,
     }
     template = 'net/home.html'
 

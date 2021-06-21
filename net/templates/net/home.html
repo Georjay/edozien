@@ -31,7 +31,10 @@
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="{% url 'inbox' %}">Inbox</a>
+          <a class="nav-link js-scroll" href="{% url 'inbox' %}">Inbox
+          {% if unread_messages >= 1 %}
+            <span class="badge badge-danger">{{ unread_messages }}</span></a>
+          {% endif %}
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link js-scroll" href="{% url 'profile' %}">My Profile</a>
