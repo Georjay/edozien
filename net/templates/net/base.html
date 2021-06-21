@@ -58,6 +58,16 @@
   <!-- Template Main Javascript File -->
   <script src="{% static 'net/js/main.js' %}"></script>
 
+  <!-- Sweet Alert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    {% if messages %}
+      {% for message in messages %}
+        swal("Good Job!", '{{ message }}', "success" );
+      {% endfor %}
+    {% endif %}
+  </script>
+
 </body>
 
 </html>

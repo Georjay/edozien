@@ -89,47 +89,25 @@
         </div>
         {% if is_paginated %}
         {% if page_obj.has_previous %}
-        <a href="?page=1" class="btn btn-outline-primary btn-sm mt-2">First</a>
-        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Previous</a>
+        <a href="?page=1" class="btn btn-outline-primary btn-sm mt-2 mb-2">First</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm mt-2 mb-2">Previous</a>
         {% endif %}
 
         {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
-        <a href="?page={{ num }}" class="btn btn-primary btn-sm mt-2">{{ num }}</a>
+        <a href="?page={{ num }}" class="btn btn-primary btn-sm mt-2 mb-2">{{ num }}</a>
         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}"
             class="btn btn-outline-primary btn-sm mt-2">{{ num }}</a>
             {% endif %}
             {% endfor %}
 
             {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm mt-2">Next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mt-2">Last</a>
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm mt-2 mb-2">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mt-2 mb-2">Last</a>
             {% endif %}
             {% endif %}
 
     </div>
-    <!-- <div class="col-md-4">
-        {% if user.is_authenticated %}
-        <div class="widget-sidebar widget-tags">
-            <h5 class="sidebar-title">Actions</h5>
-            <div class="sidebar-content">
-                <a href="{% url 'post-create' %}" class="btn btn-success bt-sm mb-1 mt-1">Add new Post</a>
-            </div>
-        </div>
-        {% endif %} -->
-        <!-- <div class="widget-sidebar widget-tags">
-            <h5 class="sidebar-title">Categories</h5>
-            <div class="sidebar-content">
-                <ul>
-                    {% for category in event_categories %}
-                    <li>
-                        <a href="#">{{ category.name }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div> -->
-    <!-- </div> -->
 </section>
 <!--/ Section Blog-Single End /-->
 

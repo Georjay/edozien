@@ -81,6 +81,9 @@ class Message(models.Model):
         verbose_name = "Inbox Message"
         verbose_name_plural = "Inbox Messages"
 
+    def get_absolute_url(self):
+        return reverse('home')
+
 class Video(models.Model):
     video = EmbedVideoField()
 

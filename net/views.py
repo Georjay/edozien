@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import create_postForm, create_eventForm
 from django.contrib import messages
@@ -20,8 +20,8 @@ from .models import (
 
 
 def home(request):
-    posts = Post.objects.order_by('-date_posted')[:3]
-    events = Event.objects.order_by('-date_posted')[:3]
+    posts = Post.objects.order_by('-date_posted')[:6]
+    events = Event.objects.order_by('-date_posted')[:6]
 
     # New way of sendind data from the front-end into the database
     if request.method == "POST":
@@ -33,6 +33,8 @@ def home(request):
             subject = data['subject'],
             body = data['message']
         )
+        messages.success(request, 'Message sent to Chiké')
+
     context = {
         'posts': posts,
         'events': events,
@@ -70,6 +72,7 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = create_postForm
+    # succes
     # fields = ['title', 'body', 'image', 'category']
     #uses the post_form.html
 
@@ -142,6 +145,7 @@ class EventDeleteView(LoginRequiredMixin, DeleteView):
     success_url = '/events/'
     #uses the event_confirm_delete.html
 
+
 class MessageListView(LoginRequiredMixin, ListView):
     model = Message
     template_name = 'net/inbox.html'
@@ -157,6 +161,7 @@ class MessageListView(LoginRequiredMixin, ListView):
         context ['read_messages'] = inbox_messages.filter(is_read="True").count()
         return context
 
+
 class MessageDetailView(LoginRequiredMixin, DetailView):
     # This method is written to make the .is_read field change from False to True.
     # Don't forget, this is still a class-based view
@@ -166,6 +171,7 @@ class MessageDetailView(LoginRequiredMixin, DetailView):
         message.save()
         template = 'net/inbox-detail.html'
         return render(request, template, locals())
+
 
 class BioListView(ListView):
     model = Video
