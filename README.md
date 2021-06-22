@@ -2,6 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.9.1-brightgreen.svg)](https://python.org)
 [![Django Version](https://img.shields.io/badge/django-3.2.1-brightgreen.svg)](https://djangoproject.com)
+[![Bootstrap Version](https://img.shields.io/badge/bootstrap-v.4-brightgreen.svg)](https://getbootstrap.com/)
 
 This is a personal website for Frankie Edozien which also gives it's user the ability to write blogs and archive events in the form of posts.
 
