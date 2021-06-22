@@ -47,4 +47,4 @@ The project will be available at **127.0.0.1:8000**.
 
 ## Extras
 
-Not that variables have been used in the settings.py
+Note that variables have been used in the settings.py
