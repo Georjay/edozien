@@ -59,6 +59,7 @@ class PostListView(ListView):
     #     context ['all_categories'] = PostCategory.objects.all()
     #     return context
 
+
 class UserPostListView(ListView):
     model = Post
     template_name = 'net/user_posts.html'
@@ -97,6 +98,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user 
         return super().form_valid(form)
 
+
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = create_postForm
@@ -108,9 +110,10 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         form.instance.author = self.request.user 
         return super().form_valid(form)
 
+
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
-    success_url = '/'
+    success_url = '/blog/'
     #uses the post_confirm_delete.html
 
 
@@ -126,6 +129,7 @@ class EventListView(ListView):
         context ['event_categories'] = EventCategory.objects.all()
         return context
 
+
 class UserEventListView(ListView):
     model = Event
     template_name = 'net/user_events.html'
@@ -135,6 +139,7 @@ class UserEventListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Event.objects.filter(author=user).order_by('-date_posted')
+
 
 class EventDetailView(DetailView):
     model = Event
@@ -146,6 +151,7 @@ class EventDetailView(DetailView):
         context ['event_categories'] = EventCategory.objects.all()
         return context
 
+
 class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
     form_class = create_eventForm
@@ -156,6 +162,7 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user 
         return super().form_valid(form)
 
+
 class EventUpdateView(LoginRequiredMixin, UpdateView):
     model = Event
     form_class = create_eventForm
@@ -165,6 +172,7 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
         #This assigns the current logged in user as the author before saving the post to avoid an integrity error
         form.instance.author = self.request.user 
         return super().form_valid(form)
+
 
 class EventDeleteView(LoginRequiredMixin, DeleteView):
     model = Event
@@ -177,7 +185,7 @@ class MessageListView(LoginRequiredMixin, ListView):
     template_name = 'net/inbox.html'
     context_object_name = 'inbox'
     ordering = ['-id']
-    paginate_by = 10
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
