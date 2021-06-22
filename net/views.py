@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import create_postForm, create_eventForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -53,11 +54,25 @@ class PostListView(ListView):
     ordering = ['-date_posted']
     paginate_by = 15
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context ['recent_posts'] = Post.objects.order_by('-date_posted')[:5]
-        context ['all_categories'] = PostCategory.objects.all()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context ['all_categories'] = PostCategory.objects.all()
+    #     return context
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'net/user_posts.html'
+    context_object_name = 'posts'
+    paginate_by = 15
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context ['all_categories'] = PostCategory.objects.all()
+    #     return context
 
 
 class PostDetailView(DetailView):
@@ -74,7 +89,6 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = create_postForm
-    # succes
     # fields = ['title', 'body', 'image', 'category']
     #uses the post_form.html
 
@@ -105,12 +119,22 @@ class EventListView(ListView):
     template_name = 'net/event.html'
     context_object_name = 'events'
     ordering = ['-date_posted']
-    paginate_by = 10
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context ['event_categories'] = EventCategory.objects.all()
         return context
+
+class UserEventListView(ListView):
+    model = Event
+    template_name = 'net/user_events.html'
+    context_object_name = 'events'
+    paginate_by = 15
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Event.objects.filter(author=user).order_by('-date_posted')
 
 class EventDetailView(DetailView):
     model = Event

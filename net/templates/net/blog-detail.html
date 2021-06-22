@@ -53,7 +53,7 @@
                         <ul>
                             <li>
                                 <span class="ion-ios-person"></span>
-                                <a>{{ object.author.first_name }} {{ object.author.last_name }}</a>
+                                <a href="{% url 'user-posts' object.author.username %}">{{ object.author.first_name }} {{ object.author.last_name }}</a>
                             </li>
                             <li>
                                 <span class="ion-pricetag"></span>
