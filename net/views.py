@@ -24,6 +24,7 @@ def home(request):
     posts = Post.objects.order_by('-date_posted')[:6]
     events = Event.objects.order_by('-date_posted')[:6]
     unread_messages = Message.objects.filter(is_read="False").count()
+    videos = Video.objects.order_by('-id')[:6]
 
     # New way of sendind data from the front-end into the database
     if request.method == "POST":
@@ -41,6 +42,7 @@ def home(request):
         'posts': posts,
         'events': events,
         'unread_messages': unread_messages,
+        'videos': videos,
     }
     template = 'net/home.html'
 
@@ -211,3 +213,11 @@ class BioListView(ListView):
     model = Video
     template_name = 'net/bio.html'
     context_object_name = 'videos'
+    paginate_by = 2
+
+
+class VideoListView(ListView):
+    model = Video
+    template_name = 'net/videos.html'
+    context_object_name = 'myvideos'
+    ordering = ['-id']

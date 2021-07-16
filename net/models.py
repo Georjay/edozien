@@ -47,6 +47,7 @@ class EventCategory(models.Model):
         verbose_name = "Event Category"
         verbose_name_plural = "Event Categories"
 
+
 class Event(models.Model):
     title = models.CharField(max_length=100)
     body = RichTextField(blank=True, null=True)
@@ -66,6 +67,7 @@ class Event(models.Model):
         verbose_name = "Event"
         verbose_name_plural = "Events"
 
+
 class Message(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -84,7 +86,19 @@ class Message(models.Model):
     def get_absolute_url(self):
         return reverse('home')
 
+
 class Video(models.Model):
+    video = EmbedVideoField()
+
+    def __str__(self):
+        return self.video
+
+    class Meta:
+        verbose_name = "Video"
+        verbose_name_plural = "Videos"
+
+
+class MyVideo(models.Model):
     video = EmbedVideoField()
 
     def __str__(self):
