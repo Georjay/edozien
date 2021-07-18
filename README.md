@@ -4,7 +4,7 @@
 [![Django Version](https://img.shields.io/badge/django-3.2.1-brightgreen.svg)](https://djangoproject.com)
 [![Bootstrap Version](https://img.shields.io/badge/bootstrap-v.4-brightgreen.svg)](https://getbootstrap.com/)
 
-This is a personal website for Frankie Edozien which also gives it's user the ability to write blogs and archive events in the form of posts.
+This is a personal website for Chike Frankie Edozien. It gives it's user the ability to write blogs and archive events.
 
 ## Screenshots
 ![edozien](https://raw.githubusercontent.com/Georjay/screenshots/main/edozien.png)
