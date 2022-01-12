@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get('EDOZIEN_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'False')
 
 ALLOWED_HOSTS = ['edozien.herokuapp.com']
 
