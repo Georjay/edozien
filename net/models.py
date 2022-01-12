@@ -99,10 +99,12 @@ class Video(models.Model):
 
 
 class MyVideo(models.Model):
-    video = EmbedVideoField()
+    title = models.CharField(max_length=100)
+    added_at = models.DateTimeField(auto_now_add=True)
+    url = EmbedVideoField()
 
     def __str__(self):
-        return self.video
+        return str(self.title)
 
     class Meta:
         verbose_name = "Video"

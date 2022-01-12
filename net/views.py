@@ -17,6 +17,7 @@ from .models import (
     EventCategory, 
     Message,
     Video,
+    MyVideo,
     )
 
 
@@ -220,4 +221,10 @@ class VideoListView(ListView):
     model = Video
     template_name = 'net/videos.html'
     context_object_name = 'myvideos'
+    ordering = ['-id']
+
+class MyVideoListView(ListView):
+    model = MyVideo
+    template_name = 'net/myvideos.html'
+    context_object_name = 'videos'
     ordering = ['-id']

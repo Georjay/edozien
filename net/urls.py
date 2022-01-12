@@ -15,7 +15,7 @@ from .views import (
     MessageListView,
     MessageDetailView,
     BioListView,
-    VideoListView,
+    MyVideoListView,
 )
 from . import views
 
@@ -36,5 +36,5 @@ urlpatterns = [
     path('inbox/', MessageListView.as_view(), name='inbox'),
     path('inbox/<int:pk>/', MessageDetailView.as_view(), name='inbox-detail'),
     path('about/', BioListView.as_view(), name='about-me'),
-    path('videos/', VideoListView.as_view(), name='my-videos'),
+    path('videos/', MyVideoListView.as_view(), name='my-videos'),
 ]
