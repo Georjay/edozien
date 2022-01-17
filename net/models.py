@@ -7,7 +7,7 @@ from embed_video.fields import EmbedVideoField
 
 
 class PostCategory(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -38,7 +38,7 @@ class Post(models.Model):
 
 
 class EventCategory(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
