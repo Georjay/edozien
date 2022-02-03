@@ -46,7 +46,12 @@
                     </div>
                     <div class="post-meta">
                         <h1 class="title">{{ object.title | title }}</h1>
-                        <ul class="small">
+                        {% if object.sub_title %}
+                            <p class="subtitle-a h5">
+                                {{ object.sub_title }}
+                            </p>
+                        {% endif %}
+                        <ul class="small mb-5">
                             <li>
                                 <span class="ion-ios-person"></span>
                                 <a href="{% url 'user-posts' object.author.username %}">{{ object.author.first_name }} {{ object.author.last_name }}</a>
@@ -57,7 +62,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="lead article-content">
+                    <div class="lead article-content mb-5">
                         <p>
                             {{ object.body|safe }}
                         </p>

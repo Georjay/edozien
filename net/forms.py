@@ -11,6 +11,7 @@ class create_postForm(ModelForm):
         model = Post
         fields = [ 
             'title',
+            'sub_title',
             'body',
             'image',
             'category'

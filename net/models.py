@@ -18,7 +18,8 @@ class PostCategory(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=256)
+    sub_title = models.CharField(max_length=256, null=True, blank=True)
     body = RichTextField(blank=True, null=True)
     image = models.ImageField(default='postdefault.jpg', upload_to='post_pics', blank=True, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
