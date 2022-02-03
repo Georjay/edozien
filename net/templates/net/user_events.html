@@ -28,7 +28,7 @@
     <div class="intro-content display-table">
         <div class="table-cell">
             <div class="container">
-                <h2 class="intro-title mb-4">Events by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h2>
+                <h2 class="intro-title mb-4">Events posted by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h2>
                 <ol class="breadcrumb d-flex justify-content-center">
                     <li class="breadcrumb-item active">
                         <a href="{% url 'events' %}">&laquo; All Events</a>
@@ -53,17 +53,17 @@
                             <ul>
                                 <li>
                                     <span class="ion-ios-person"></span>
-                                    <a href="{% url 'user-events' event.author.username %}">{{ event.author.first_name }} {{ event.author.last_name }}</a>
+                                    <a>{{ event.author.first_name }} {{ event.author.last_name }}</a>
                                 </li>
                                 <li>
                                     <span class="ion-pricetag"></span>
                                     {% for category in event.category.all %}
-                                    <a>{{ category.name }}</a>
+                                    <a> • {{ category.name }}</a>
                                     {% endfor %}
                                 </li>
                                 <li>
                                     <span class="ion-ios-calendar-outline"></span>
-                                    <a>{{ event.date_posted|naturaltime }}</a>
+                                    <a>{{ event.date_posted|date:'M t, o' }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -108,9 +108,9 @@
                     <div class="sidebar-content">
                         <ul>
                             {% for category in event_categories %}
-                            <li>
-                                <a href="#">{{ category.name }}</a>
-                            </li>
+                                <li>
+                                    <a href="#">{{ category.name }}</a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>

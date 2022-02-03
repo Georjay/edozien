@@ -16,7 +16,6 @@ from .models import (
     Event, 
     EventCategory, 
     Message,
-    Video,
     MyVideo,
     )
 
@@ -25,9 +24,9 @@ def home(request):
     posts = Post.objects.order_by('-date_posted')[:6]
     events = Event.objects.order_by('-date_posted')[:6]
     unread_messages = Message.objects.filter(is_read="False").count()
-    videos = Video.objects.order_by('-id')[:9]
+    videos = MyVideo.objects.order_by('-id')[:9]
 
-    # New way of sendind data from the front-end into the database
+    # My new way of sending data from the front-end into the database
     if request.method == "POST":
         data = request.POST
         
@@ -142,6 +141,11 @@ class UserEventListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Event.objects.filter(author=user).order_by('-date_posted')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['event_categories'] = EventCategory.objects.all()
+        return context
 
 
 class EventDetailView(DetailView):
@@ -211,20 +215,14 @@ class MessageDetailView(LoginRequiredMixin, DetailView):
 
 
 class BioListView(ListView):
-    model = Video
+    model = MyVideo
     template_name = 'net/bio.html'
     context_object_name = 'videos'
-    paginate_by = 2
-
-
-class VideoListView(ListView):
-    model = Video
-    template_name = 'net/videos.html'
-    context_object_name = 'myvideos'
-    ordering = ['-id']
+    paginate_by = 2 #shows the first 2 videos on the bio page
+    
 
 class MyVideoListView(ListView):
     model = MyVideo
-    template_name = 'net/myvideos.html'
+    template_name = 'net/videos.html'
     context_object_name = 'videos'
     ordering = ['-id']

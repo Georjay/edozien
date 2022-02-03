@@ -85,18 +85,7 @@ class Message(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
-
-
-class Video(models.Model):
-    video = EmbedVideoField()
-
-    def __str__(self):
-        return self.video
-
-    class Meta:
-        verbose_name = "Video"
-        verbose_name_plural = "Videos"
-
+        
 
 class MyVideo(models.Model):
     title = models.CharField(max_length=100)

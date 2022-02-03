@@ -28,7 +28,7 @@
           <a class="nav-link js-scroll" href="#video">Videos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="#blog">Blog</a>
+          <a class="nav-link js-scroll" href="#blog">Articles</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll" href="#contact">Contact</a>
@@ -75,11 +75,11 @@
               <div class="row">
                 <div class="col-sm-6 col-md-5">
                   <div class="about-img">
-                    <img src="{% static 'net/img/testimonial-2.jpg' %}" class="img-fluid rounded b-shadow-a" alt="">
+                    <img src="{% static 'net/img/testimonial-2.jpg' %}" class="img-fluid rounded b-shadow-a" alt="edozien-hs" width="300" height="300">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-7">
-                  <div class="about-info">
+                  <div>
                     <p><span class="title-s">Name: </span> <span>Chiké Frankie Edozien</span></p>
                     <p><span class="title-s">Profile: </span> <span>Writer & Journalist</span></p>
                     <p><span class="title-s">Email: </span> <span>frankie@edozien.net</span></p>
@@ -94,11 +94,10 @@
                     </div>
                     <div class="work-content">
                       <div class="row">
-                        <div class="col-sm-8">
-                          <h2 class="w-title">Lives of Great Men</h2>
-                          <div class="w-more">
-                            <span class="w-ctegory">My Current Book</span>
-                          </div>
+                        <div class="col-sm-12">
+                          <!-- <h2 class="w-title">Lives of Great Men</h2> -->
+                          <h2 class="w-title">ORDER MY BOOK</h2>
+                          <a href="https://www.amazon.com/Lives-Great-Men-Living-African/dp/0995516235" target="_blank">Amazon</a>
                         </div>
                       </div>
                     </div>
@@ -212,33 +211,34 @@
     </div>
     <div class="row">
       {% for event in events %}
-      <div class="col-md-4">
-        <div class="work-box">
-          <a href="{% url 'event-detail' event.id %}">
-            <div class="work-img">
-              <img src="{{ event.image.url }}" alt="" class="img-fluid">
-            </div>
-            <div class="work-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h2 class="w-title">{{ event.title }}</h2>
-                  <div class="w-more">
-                    <!-- {% for category in event.category.all %}
-                      <span class="w-ctegory"> {{ category.name }}</span>
-                    {% endfor %} -->
-                    <span class="ion-ios-calendar-outline"></span>
-                    <span class="w-date">{{ event.date_posted|naturaltime }}</span>
+        <div class="col-md-4">
+          <div class="work-box">
+            <a href="{% url 'event-detail' event.id %}">
+              <div class="work-img">
+                <img src="{{ event.image.url }}" alt="" class="img-fluid">
+              </div>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">{{ event.title }}</h2>
+                    <div class="w-more">
+                      <!-- {% for category in event.category.all %}
+                        <span class="w-ctegory"> • {{ category.name }}</span>
+                      {% endfor %} -->
+                      <!-- <span class="ion-ios-calendar-outline"></span>
+                      <span class="w-date">{{ event.date_posted|naturaltime }}</span> -->
+                      <span class="w-date">{{ event.date_posted|date:'M t, o' }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
-      </div>
       {% empty %}
-      <div class="text-center mb-5">
-        <span class="badge badge-secondary">No Events yet</span>
-      </div>
+        <div class="text-center mb-5">
+          <span class="badge badge-secondary">No Events yet</span>
+        </div>
       {% endfor %}
     </div>
   </div>
@@ -260,10 +260,17 @@
           <a href="{% url 'my-videos' %}" class="btn btn-outline-primary btn-sm mt-2 mb-1"> See all Videos </a>
         </div>
         <div class="box-shadow-full text-center">
-          <div class="mb-3">
+          <div>
             {% for vid in videos %}
-                {% video vid.video '33% x 50%' %}
-            {% endfor %}
+                <figure class="figure mr-2">
+                    {% video vid.url '426x240' %}
+                    <figcaption class="figure-caption">{{ vid.title }}</figcaption>
+                </figure>
+              {% empty %}
+                  <div class="text-center mb-5">
+                      <span class="badge badge-dark">No videos uploaded</span>
+                  </div>
+              {% endfor %}
           </div>
         </div>
       </div>
@@ -317,11 +324,11 @@
       <div class="col-sm-12">
         <div class="title-box text-center">
           <h3 class="title-a">
-            Blog
+            Articles
           </h3>
           <div class="line-mf"></div>
           <p class="subtitle-a">
-            <a href="{% url 'blog-posts' %}" class="btn btn-outline-primary btn-sm mb-1 mt-3">See all Blog Posts</a>
+            <a href="{% url 'blog-posts' %}" class="btn btn-outline-primary btn-sm mb-1 mt-3">See all Articles</a>
           </p>
         </div>
       </div>
@@ -332,7 +339,7 @@
       <div class="col-md-4">
         <div class="card card-blog">
           <div class="card-img">
-            <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt="" class="img-fluid"></a>
+            <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt="article-image" class="img-fluid"></a>
           </div>
           <div class="card-body">
             <div class="card-category-box">
@@ -349,7 +356,7 @@
           </div>
           <div class="card-footer">
             <div class="post-author">
-              <img src="{{ post.author.profile.image.url }}" alt="" class="avatar rounded-circle">
+              <img src="{{ post.author.profile.image.url }}" alt="user-image" class="avatar rounded-circle">
               <span class="author text-muted"><a href="{% url 'user-posts' post.author.username %}">{{ post.author.first_name }} {{ post.author.last_name }}</a></span>
             </div>
             <div class="post-date text-muted">
@@ -361,7 +368,7 @@
       </div>
       {% empty %}
       <div class="text-center">
-        <span class="badge badge-secondary">No Blog Posts yet</span>
+        <span class="badge badge-dark">No Blog Posts yet</span>
       </div>
       {% endfor %}
     </div>
@@ -462,7 +469,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="copyright-box">
-            <p class="copyright">&copy; Copyright 2021</p>
+            <p class="copyright">&copy; Chiké Frankie Edozien. All rights reserved.</p>
             <div class="credits">
               Developed by <a href="https://twitter.com/CodepriestM/" target="_blank"><strong>CodePriest
                   Media</strong></a>
@@ -473,5 +480,4 @@
     </div>
   </footer>
 </section>
-<!--/ Section Contact-footer End /-->
 {% endblock %}

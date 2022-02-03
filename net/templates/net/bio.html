@@ -12,13 +12,9 @@
             <span></span>
             <span></span>
         </button>
-        <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
-                </li>
-            </ul>
-        </div>
+        <!--/ Navbar Start /-->
+        {% include 'net/navbar.html' %}
+        <!--/ Navbar End /-->
     </div>
 </nav>
 
@@ -43,7 +39,7 @@
                 <div class="post-box">
                     <div class="about-me pt-4 pt-md-0">
                         <p class="lead text-justify">
-                            Chike Frankie Edozien began his journalism career reading the news bulletins at the Nigerian
+                            Chiké Frankie Edozien began his journalism career reading the news bulletins at the Nigerian
                             boarding school Federal Government College, Port Harcourt from 1981-1986. While studying for
                             a journalism degree in New York, he was part of the BET News team that covered the 1992
                             Democratic National convention that culminated in Bill Clinton’s nomination for president of
@@ -114,7 +110,14 @@
                         </p>
                         <div class="text-center mt-3 mb-3">
                             {% for vid in videos %}
-                                {% video vid.video 'tiny' %}
+                                <figure class="figure mr-2">
+                                    {% video vid.url '426x240' %}
+                                    <figcaption class="figure-caption">{{ vid.title }}</figcaption>
+                                </figure>
+                            {% empty %}
+                                <div class="text-center mb-5">
+                                    <span class="badge badge-dark">No videos uploaded</span>
+                                </div>
                             {% endfor %}
                         </div>
                         <p class="lead text-justify">
@@ -129,6 +132,7 @@
 
                             He is the author of ‘Lives of Great Men (Team Angelica 2017) which won the 2018 Lambda
                             Literary prize for Best Gay Memoir/Biography.
+                        </p>
                         <div class="text-center">
                             <figure class="figure">
                                 <img src="{% static 'net/img/lammy.jpg' %}" width="400" height="500"
@@ -137,8 +141,9 @@
                                 <figcaption class="figure-caption text-right">Lambda Literary Award</figcaption>
                             </figure>
                         </div>
-                        ‘Lives’ has also been shortlisted for the 2018 Gerald Kraak Award for gender sexuality and
-                        human rights writing and for the Randy Shilts Nonfiction prize for the Publishing Triangle.
+                        <p class="lead text-justify">
+                            ‘Lives’ has also been shortlisted for the 2018 Gerald Kraak Award for gender sexuality and
+                            human rights writing and for the Randy Shilts Nonfiction prize for the Publishing Triangle.
                         </p>
                         <div class="row">
                             <div class="col-md-4">

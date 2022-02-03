@@ -11,13 +11,9 @@
             <span></span>
             <span></span>
         </button>
-        <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
-                </li>
-            </ul>
-        </div>
+        <!--/ Navbar Start /-->
+        {% include 'net/navbar.html' %}
+        <!--/ Navbar End /-->
     </div>
 </nav>
 
@@ -46,31 +42,30 @@
             <div class="col-md-8">
                 <div class="post-box">
                     <div class="post-thumb">
-                        <img src="{{ object.image.url }}" class="img-fluid" alt="">
+                        <img src="{{ object.image.url }}" class="img-fluid" alt="article-image">
                     </div>
                     <div class="post-meta">
-                        <h1 class="article-title">{{ object.title }}</h1>
-                        <ul>
+                        <h1 class="title">{{ object.title | title }}</h1>
+                        <ul class="small">
                             <li>
                                 <span class="ion-ios-person"></span>
                                 <a href="{% url 'user-posts' object.author.username %}">{{ object.author.first_name }} {{ object.author.last_name }}</a>
                             </li>
                             <li>
-                                <span class="ion-pricetag"></span>
-                                {% for category in object.category.all %}
-                                <a>{{ category.name }}</a>
-                                {% endfor %}
-                            </li>
-                            <li>
-                                <span class="ion-chatbox"></span>
-                                <a>{{ object.date_posted|date:"F d, Y"}}</a>
+                                <span class="ion-ios-calendar-outline"></span>
+                                {{ object.date_posted|date:"M d, Y"}}
                             </li>
                         </ul>
                     </div>
-                    <div class="article-content">
+                    <div class="lead article-content">
                         <p>
                             {{ object.body|safe }}
                         </p>
+                    </div>
+                    <div>
+                        {% for category in object.category.all %}
+                            <button type="button" class="btn btn-outline-secondary btn-sm">#{{ category.name }}</button>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="box-comments">
@@ -192,14 +187,13 @@
                 <div class="widget-sidebar widget-tags">
                     <h5 class="sidebar-title">Actions</h5>
                     <div class="sidebar-content">
-                        <a href="{% url 'post-update' object.id %}" class="btn btn-secondary bt-sm mb-1 mt-1">Update
-                            Post</a>
-                        <a href="{% url 'post-delete' object.id %}" class="btn btn-danger bt-sm mb-1 mt-1">Delete
-                            Post</a>
+                        <a href="{% url 'post-update' object.id %}" class="btn btn-secondary bt-sm mb-1 mt-1">Update Post</a>
+                        <a href="{% url 'post-delete' object.id %}" class="btn btn-danger bt-sm mb-1 mt-1">Delete Post</a>
                     </div>
                 </div>
                 {% endif %}
-                <div class="widget-sidebar sidebar-search">
+                <!-- Search Bar Here -->
+                <!-- <div class="widget-sidebar sidebar-search">
                     <h5 class="sidebar-title">Search</h5>
                     <div class="sidebar-content">
                         <form>
@@ -214,9 +208,9 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
                 <div class="widget-sidebar">
-                    <h5 class="sidebar-title">Recent Posts</h5>
+                    <h5 class="sidebar-title">Recent Articles</h5>
                     <div class="sidebar-content">
                         <ul class="list-sidebar">
                             {% for post in recent_posts %}
@@ -250,7 +244,7 @@
                     </div>
                 </div> -->
                 <div class="widget-sidebar widget-tags">
-                    <h5 class="sidebar-title">Tags</h5>
+                    <h5 class="sidebar-title">Categories</h5>
                     <div class="sidebar-content">
                         <ul>
                             {% for category in all_categories %}

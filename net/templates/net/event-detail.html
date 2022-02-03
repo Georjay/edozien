@@ -11,13 +11,9 @@
             <span></span>
             <span></span>
         </button>
-        <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll active" href="{% url 'home' %}">Home</a>
-                </li>
-            </ul>
-        </div>
+        <!--/ Navbar Start /-->
+        {% include 'net/navbar.html' %}
+        <!--/ Navbar End /-->
     </div>
 </nav>
 
@@ -27,7 +23,7 @@
     <div class="intro-content display-table">
         <div class="table-cell">
             <div class="container">
-                <h2 class="intro-title mb-4">{{ object.title }}</h2>
+                <h2 class="intro-title mb-4">{{ object.title | truncatewords_html:3 }}</h2>
                 <ol class="breadcrumb d-flex justify-content-center">
                     <li class="breadcrumb-item active">
                         <a href="{% url 'events' %}">&laquo; Back to Events</a>
@@ -45,33 +41,32 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="post-box">
-                    <div class="post-thumb">
-                        <img src="{{ object.image.url }}" class="img-fluid" alt="">
-                    </div>
                     <div class="post-meta">
-                        <h1 class="article-title">{{ object.title }}</h1>
-                        <ul>
+                        <h1 class="title">{{ object.title | title }}</h1>
+                        <ul class="small">
                             <li>
                                 <span class="ion-ios-person"></span>
-                                <a href="{% url 'user-events' object.author.username %}">{{ object.author.first_name }} {{ object.author.last_name }}</a>
+                                <!-- <ion-icon name="person-sharp"></ion-icon> -->
+                                <a href="{% url 'user-events' object.author.username %}" class="author">{{ object.author.first_name }} {{ object.author.last_name }}</a>
                             </li>
                             <li>
-                                <span class="ion-pricetag"></span>
-                                {% for category in object.category.all %}
-                                <a>{{ category.name }}</a>
-                                {% endfor %}
-                            </li>
-                            <li>
-                                <!-- <span class="ion-chatbox"></span> -->
                                 <span class="ion-ios-calendar-outline"></span>
-                                <a>{{ object.date_posted|date:"F d, Y"}}</a>
+                                {{ object.date_posted|date:"M d, Y"}}
                             </li>
                         </ul>
                     </div>
-                    <div class="article-content">
+                    <div class="post-thumb">
+                        <img src="{{ object.image.url }}" class="img-fluid" alt="event-image">
+                    </div>
+                    <div class="lead article-content mb-5">
                         <p>
                             {{ object.body|safe }}
                         </p>
+                    </div>
+                    <div>
+                        {% for category in object.category.all %}
+                            <button type="button" class="btn btn-outline-secondary btn-sm">#{{ category.name }}</button>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="box-comments">
@@ -86,14 +81,13 @@
                 <div class="widget-sidebar widget-tags">
                     <h5 class="sidebar-title">Actions</h5>
                     <div class="sidebar-content">
-                        <a href="{% url 'event-update' object.id %}" class="btn btn-secondary mb-1 mt-1">Update
-                            Event</a>
-                        <a href="{% url 'event-delete' object.id %}" class="btn btn-danger mb-1 mt-1">Delete
-                            Event</a>
+                        <a href="{% url 'event-update' object.id %}" class="btn btn-secondary mb-1 mt-1">Update Event</a>
+                        <a href="{% url 'event-delete' object.id %}" class="btn btn-danger mb-1 mt-1">Delete Event</a>
                     </div>
                 </div>
                 {% endif %}
-                <div class="widget-sidebar sidebar-search">
+                <!-- Search Bar Here -->
+                <!-- <div class="widget-sidebar sidebar-search">
                     <h5 class="sidebar-title">Search</h5>
                     <div class="sidebar-content">
                         <form>
@@ -108,7 +102,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
                 <div class="widget-sidebar">
                     <h5 class="sidebar-title">Recent Events</h5>
                     <div class="sidebar-content">
@@ -145,7 +139,7 @@
                 </div> -->
                 <div class="widget-sidebar widget-tags">
                     <h5 class="sidebar-title">Tags</h5>
-                    <div class="sidebar-content">
+                    <div class="sidebar-content muted">
                         <ul>
                             {% for category in event_categories %}
                             <li>

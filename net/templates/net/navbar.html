@@ -1,0 +1,24 @@
+<div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'about-me' %}">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'events' %}">Events</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'my-videos' %}">Videos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll" href="{% url 'blog-posts' %}">Articles</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link js-scroll" href="{% url 'inbox' %}">Inbox</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
