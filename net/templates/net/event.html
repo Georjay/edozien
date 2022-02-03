@@ -38,9 +38,11 @@
             <div class="col-md-8">
                 {% for event in events %}           
                     <div class="row post-box">
-                        <div class="col-4 col-md-3 card-img mt-0">
-                            <img src="{{ event.image.url }}" alt="event-image" class="img-fluid rounded" width="300" height="300">
-                        </div>
+                        {% if event.image %}
+                            <div class="col-4 col-md-3 card-img mt-0">
+                                <img src="{{ event.image.url }}" alt="event-image" class="img-fluid rounded" width="300" height="300">
+                            </div>
+                        {% endif %}
                         <div class="col-8 col-md-9 post-meta mt-0">
                             <h1 class="article-title"> <a href="{% url 'event-detail' event.id %}"> {{ event.title }}</a> </h1>
                             <ul>

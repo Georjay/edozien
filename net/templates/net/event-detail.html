@@ -55,9 +55,11 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="post-thumb">
-                        <img src="{{ object.image.url }}" class="img-fluid" alt="event-image">
-                    </div>
+                    {% if event.image %}
+                        <div class="post-thumb">
+                            <img src="{{ object.image.url }}" class="img-fluid" alt="event-image">
+                        </div>
+                    {% endif %}
                     <div class="lead article-content mb-5">
                         <p>
                             {{ object.body|safe }}

@@ -20,7 +20,7 @@ class PostCategory(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     body = RichTextField(blank=True, null=True)
-    image = models.ImageField(default='postdefault.jpg', upload_to='post_pics')
+    image = models.ImageField(default='postdefault.jpg', upload_to='post_pics', blank=True, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     category = models.ManyToManyField(PostCategory)
     author = models.ForeignKey(User, on_delete=models.CASCADE) #Never delete a user. Make inactive instead.
@@ -51,7 +51,7 @@ class EventCategory(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=100)
     body = RichTextField(blank=True, null=True)
-    image = models.ImageField(default='eventdefault.jpg', upload_to='event_pics')
+    image = models.ImageField(default='eventdefault.jpg', upload_to='event_pics', blank=True, null=True) #blank and null adds a clear button to image field in django admin
     date_posted = models.DateTimeField(default=timezone.now)
     category = models.ManyToManyField(EventCategory)
     author = models.ForeignKey(User, on_delete=models.CASCADE) #Never delete a user. Make inactive instead.
