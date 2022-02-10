@@ -33,11 +33,6 @@
 <!--/ Section Blog-Single Star /-->
 <section class="blog-wrapper sect-pt4">
     <div class="container">
-        <!-- <div class="mb-5 mt-1">
-            {% for category in all_categories %}
-                <a class="btn btn-outline-dark" href="{% url 'blog-posts' %}?category={{ category.name }}">{{ category.name }}</a>
-            {% endfor %}
-        </div> -->
         {% if user.is_authenticated %}
             <div class="d-flex justify-content-end mb-4">
                 <a href="{% url 'post-create' %}" class="btn btn-success btn-lg">Add new Post</a>
@@ -81,20 +76,20 @@
         
         {% if is_paginated %}
             {% if page_obj.has_previous %}
-                <a href="?page=1" class="btn btn-outline-primary btn-sm mt-2 mb-2">First</a>
-                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm mt-2 mb-2">Previous</a>
+                <a href="?page=1" class="btn btn-outline-primary btn-sm mb-2">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm mb-2">Previous</a>
             {% endif %}
 
             {% for num in page_obj.paginator.page_range %}
                 {% if page_obj.number == num %}
-                    <a href="?page={{ num }}" class="btn btn-primary btn-sm mt-2 mb-2">{{ num }}</a>
-                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}" class="btn btn-outline-primary btn-sm mt-2">{{ num }}</a>
+                    <a href="?page={{ num }}" class="btn btn-primary btn-sm mb-2">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}" class="btn btn-outline-primary btn-sm mb-2">{{ num }}</a>
                 {% endif %}
             {% endfor %}
 
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm mt-2 mb-2">Next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mt-2 mb-2">Last</a>
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm mb-2">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mb-2">Last</a>
             {% endif %}
         {% endif %}
     </div>
