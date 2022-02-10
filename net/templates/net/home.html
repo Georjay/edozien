@@ -251,7 +251,7 @@
               {% for vid in videos %}
                   <figure class="figure mr-2">
                       {% video vid.url '426x240' %}
-                      <figcaption class="figure-caption">{{ vid.title }}</figcaption>
+                      <figcaption class="figure-caption">{{ vid.title|truncatewords_html:9 }}</figcaption>
                   </figure>
                 {% empty %}
                     <div class="text-center mb-5">

@@ -13,8 +13,8 @@ class PostCategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Post Category"
-        verbose_name_plural = "Post Categories"
+        verbose_name = "Article Category"
+        verbose_name_plural = "Article Categories"
 
 
 class Post(models.Model):
@@ -34,8 +34,8 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
     class Meta:
-        verbose_name = "Post"
-        verbose_name_plural = "Posts"
+        verbose_name = "Article"
+        verbose_name_plural = "Articles"
 
 
 class EventCategory(models.Model):
@@ -76,7 +76,7 @@ class Message(models.Model):
     body = models.TextField()
     subject = models.CharField(max_length=100)
     is_read = models.BooleanField(default=False)
-    date_posted = models.DateTimeField(default=timezone.now)
+    date_sent = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.subject

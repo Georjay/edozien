@@ -10,4 +10,6 @@ admin.site.register(PostCategory)
 admin.site.register(Post)
 admin.site.register(EventCategory)
 admin.site.register(Event)
-admin.site.register(Message)
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ("name", "email", "subject", "date_sent")

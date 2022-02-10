@@ -24,7 +24,7 @@ def home(request):
     posts = Post.objects.order_by('-date_posted')[:6]
     events = Event.objects.order_by('-date_posted')[:6]
     unread_messages = Message.objects.filter(is_read="False").count()
-    videos = MyVideo.objects.order_by('-id')[:9]
+    videos = MyVideo.objects.order_by('-id')[:6]
 
     # My new way of sending data from the front-end into the database
     if request.method == "POST":
