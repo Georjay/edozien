@@ -85,7 +85,7 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context ['recent_posts'] = Post.objects.order_by('-date_posted')[:5]
-        context ['all_categories'] = PostCategory.objects.all()
+        context ['all_categories'] = PostCategory.objects.order_by('?')[:7]
         return context
 
 
@@ -128,7 +128,7 @@ class EventListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['event_categories'] = EventCategory.objects.order_by('?')[:5]
+        context ['event_categories'] = EventCategory.objects.order_by('?')[:7]
         return context
 
 
@@ -155,7 +155,7 @@ class EventDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context ['recent_events'] = Event.objects.order_by('-date_posted')[:5]
-        context ['event_categories'] = EventCategory.objects.all()
+        context ['event_categories'] = EventCategory.objects.order_by('?')[:7]
         return context
 
 
