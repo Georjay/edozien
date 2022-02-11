@@ -89,13 +89,13 @@
                     </div>
                 {% endif %}
                 <div class="widget-sidebar widget-tags">
-                    <h5 class="sidebar-title">Categories</h5>
+                    <h5 class="sidebar-title">Tags</h5>
                     <div class="sidebar-content">
                         <ul>
                             {% for category in event_categories %}
-                            <li>
-                                <a href="#">{{ category.name }}</a>
-                            </li>
+                                <li>
+                                    <a href="#">{{ category.name }}</a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>

@@ -128,7 +128,7 @@ class EventListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['event_categories'] = EventCategory.objects.all()
+        context ['event_categories'] = EventCategory.objects.order_by('?')[:5]
         return context
 
 
