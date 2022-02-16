@@ -44,7 +44,12 @@
                             </div>
                         {% endif %}
                         <div class="col-8 col-md-9 post-meta mt-0">
-                            <h1 class="article-title"> <a href="{% url 'event-detail' event.id %}"> {{ event.title }}</a> </h1>
+                            {% if event.event_status == "Upcoming" %}
+                                <h1 class="article-title"> <a href="{% url 'event-detail' event.id %}"> {{ event.title }} </a> </h1>
+                                <span class="badge badge-pill badge-success text-small">Upcoming</span>
+                            {% else %}
+                                <h1 class="article-title"> <a href="{% url 'event-detail' event.id %}"> {{ event.title }} </a> </h1>
+                            {% endif %}
                             <ul>
                                 <li>
                                     <div class="post-author small">

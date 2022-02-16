@@ -65,6 +65,16 @@ class Event(models.Model):
         #This method takes me to the details page of a post when created
         return reverse('event-detail', kwargs={'pk': self.pk})
 
+    def event_status(self):
+        "Returns the status of an event."
+        now = timezone.now()
+        if self.date_posted > now:
+            return "Upcoming"
+        elif self.date_posted < now:
+            return "Past"
+        else:
+            return "Ongoing"
+
     class Meta:
         verbose_name = "Event"
         verbose_name_plural = "Events"

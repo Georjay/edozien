@@ -81,7 +81,7 @@
                   <div class="work-box about-img">
                     <a href="{% static 'net/img/lives.jpg'%}" data-lightbox="gallery-mf">
                       <div class="work-img">
-                        <img src="{% static 'net/img/lives-2.jpg'%}" alt="Lives of Great Men" class="img-fluid">
+                        <img src="{% static 'net/img/lives-1.jpg'%}" alt="Lives of Great Men" class="img-fluid">
                       </div>
                       <div class="work-content">
                         <div class="row">
@@ -211,7 +211,14 @@
                 <div class="work-content">
                   <div class="row">
                     <div class="col-sm-12">
-                      <h2 class="w-title">{{ event.title }}</h2>
+                      {% if event.event_status == "Upcoming" %}
+                        <h2 class="w-title">
+                          {{ event.title }} 
+                          <span class="badge badge-pill badge-success text-small">Upcoming</span>
+                        </h2>
+                      {% else %}
+                        <h2 class="w-title">{{ event.title }} </h2>
+                      {% endif %}
                       <div class="w-more">
                         <span class="w-date">{{ event.date_posted|date:'M d, Y' }}</span>
                       </div>
