@@ -1,0 +1,148 @@
+{% extends "net/base.html" %}
+{% load static %}
+{% load embed_video_tags %}
+
+{% block content %}
+<nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll" href="{% url 'home' %}">E D O Z I E N</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+            aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <!--/ Navbar Start /-->
+        {% include 'net/navbar.html' %}
+        <!--/ Navbar End /-->
+    </div>
+</nav>
+
+<!--/ Intro Skew Star /-->
+<div class="intro intro-single route bg-image" style="background-image: url({% static 'net/img/testimonial-2.jpg' %})">
+    <div class="overlay-mf"></div>
+    <div class="intro-content display-table">
+        <div class="table-cell">
+            <div class="container">
+                <h2 class="intro-title mb-4">Lives of Great Men</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Intro Skew End /-->
+
+<!--/ Section Blog-Single Star /-->
+<section class="blog-wrapper sect-pt4" id="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-box">
+                    <div class="about-me pt-4 pt-md-0">  
+                        <div class="row">
+                            <div class="col-md-4">
+                                <figure class="figure">
+                                    <img src="{% static 'net/img/lives-one.jpg' %}" width="400" height="500"
+                                        class="figure-img img-fluid rounded"
+                                        alt="Lambda Literary prize for Best Gay Memoir/Biography">
+                                    <a href="" target="_blank">
+                                        <!-- <figcaption class="figure-caption text-center">For readers in the US</figcaption> -->
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure class="figure">
+                                    <a href="" target="_blank">
+                                        <img src="{% static 'net/img/lives-two.jpg' %}" width="400" height="500"
+                                            class="figure-img img-fluid rounded"
+                                            alt="Lambda Literary prize for Best Gay Memoir/Biography">
+                                        <!-- <figcaption class="figure-caption text-center">For readers in Africa</figcaption> -->
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure class="figure">
+                                    <a href="https://jacana.co.za/product/lives-of-great-men-a-memoir/" target="_blank">
+                                        <img src="{% static 'net/img/lives-three.jpg' %}" width="400" height="500"
+                                            class="figure-img img-fluid rounded"
+                                            alt="Lambda Literary prize for Best Gay Memoir/Biography">
+                                        <!-- <figcaption class="figure-caption text-center">For Southern African readers</figcaption> -->
+                                    </a>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="lead text-justify col-sm-12">
+                                <p>
+                                    From Victoria Island, Lagos to Brooklyn, U.S.A. to Accra, Ghana to Paris, France; from across the Diaspora to the heart of the African continent, 
+                                    in this memoir Nigerian journalist Chike Frankie Edozien offers a highly personal series of contemporary snapshots of same gender loving Africans, 
+                                    unsung Great Men living their lives, triumphing and finding joy in the face of great adversity. 
+                                </p>
+                                <p>
+                                    On his travels and sojourns Edozien explores the 
+                                    worsening legal climate for gay men and women on the continent; the impact homophobic evangelical American pastors are having in many countries, and 
+                                    its toxic intersection with political populism; and experiences the pressures placed on those living under harshly oppressive laws that are themselves 
+                                    the legacy of colonial rule - pressures that sometimes lead to seeking asylum in the West. Yet he remains hopeful, and this memoir, which is pacy, romantic 
+                                    and funny by turns, is also a love-letter to Africa, above all to Nigeria and the megalopolis that is Lagos.
+                                </p>
+                                <p>
+                                    <a href="https://linktr.ee/LivesOfGreatMen" target="_blank" rel="noopener noreferrer">
+                                        <strong>AVAILABLE WORLDWIDE: Global Stores</strong>
+                                    </a>
+                                    <br>
+                                    <a href="https://booknook.store/product/lives-of-great-men/" target="_blank" rel="noopener noreferrer">
+                                        <strong>For readers in Ghana</strong>
+                                    </a> <br>
+                                    <a href="https://ouidabooks.com/product/lives-of-great-men/" target="_blank" rel="noopener noreferrer">
+                                        <strong>For readers in Nigeria</strong>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="mb-5">
+                        <div class="row">
+                            <figure class="figure col-xs-12 col-sm-4">
+                                <img src="{% static 'net/img/safe-house.jpg' %}"
+                                    class="figure-img img-fluid"
+                                    alt="Lives Book Cover.">
+                            </figure>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="row">
+                                    <div class="lead text-justify col-sm-12">
+                                        <p>
+                                            A Nigerian immigrant to Senegal explores the increasing influence of China across the region, a Kenyan student activist 
+                                            writes of exile in Kampala, a Liberian scientist shares her diary of the Ebola crisis, a Nigerian journalist travels to 
+                                            the north to meet a community at risk, a Kenyan author travels to Senegal to interview a gay rights activist, and a South 
+                                            African writer recounts a tale of family discord and murder in a remote seaside town.
+                                        </p>
+                                        <p>
+                                            In a collection that ranges from travel writing and memoir to reportage and meditative essays, editor Ellah Wakatama Allfrey 
+                                            has brought together some of the most talented writers of creative nonfiction from across Africa.
+                                        </p>
+                                        <p>
+                                            <strong>ORDER THE BOOK:</strong> 
+                                            <br>
+                                            <a href="https://www.amazon.com/Safe-House-Explorations-Nonfiction-Commonwealth/dp/1459735471/ref=sr_1_1?crid=2WFAX6GYEI3YQ&keywords=Safe+house+explorations&qid=1647349111&s=books&sprefix=safe+house+explorations%2Cstripbooks%2C51&sr=1-1" target="_blank" rel="noopener noreferrer">
+                                                <strong>Amazon</strong>
+                                            </a> 
+                                            <br>
+                                            <a href="https://cassavarepublic.biz/product/safe-house/" target="_blank" rel="noopener noreferrer">
+                                                <strong>For readers in UK <span><i class="fas fa-link"></i></span></strong>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Section Blog-Single End /-->
+
+<!--/ Section Contact-Footer Star /-->
+{% include 'net/footer.html' %}
+<!--/ Section Contact-footer End /-->
+
+{% endblock %}

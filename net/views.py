@@ -219,7 +219,13 @@ class BioListView(ListView):
     template_name = 'net/bio.html'
     context_object_name = 'videos'
     paginate_by = 2 #shows the first 2 videos on the bio page
-    
+
+
+class BookListView(ListView):
+    model = MyVideo
+    template_name = 'net/books.html'
+    context_object_name = 'books'
+
 
 class MyVideoListView(ListView):
     model = MyVideo
