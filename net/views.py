@@ -16,7 +16,7 @@ from .models import (
     Event, 
     EventCategory, 
     Message,
-    MyVideo,
+    MyVideo
     )
 
 
@@ -56,10 +56,12 @@ class PostListView(ListView):
     ordering = ['-date_posted']
     paginate_by = 15
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context ['all_categories'] = PostCategory.objects.all()
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        inbox_messages = Message.objects.all()
+        context ['unread_messages'] = inbox_messages.filter(is_read="False").count()
+        # context ['all_categories'] = PostCategory.objects.all()
+        return context
 
 
 class UserPostListView(ListView):
@@ -128,6 +130,8 @@ class EventListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        inbox_messages = Message.objects.all()
+        context ['unread_messages'] = inbox_messages.filter(is_read="False").count()
         context ['event_categories'] = EventCategory.objects.order_by('?')[:7]
         return context
 
@@ -220,15 +224,32 @@ class BioListView(ListView):
     context_object_name = 'videos'
     paginate_by = 2 #shows the first 2 videos on the bio page
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        inbox_messages = Message.objects.all()
+        context ['unread_messages'] = inbox_messages.filter(is_read="False").count()
+        return context
+
 
 class BookListView(ListView):
     model = MyVideo
     template_name = 'net/books.html'
     context_object_name = 'books'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        inbox_messages = Message.objects.all()
+        context ['unread_messages'] = inbox_messages.filter(is_read="False").count()
+        return context
 
 class MyVideoListView(ListView):
     model = MyVideo
     template_name = 'net/videos.html'
     context_object_name = 'videos'
     ordering = ['-id']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        inbox_messages = Message.objects.all()
+        context ['unread_messages'] = inbox_messages.filter(is_read="False").count()
+        return context
