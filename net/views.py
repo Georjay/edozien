@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import create_postForm, create_eventForm
+from .forms import create_postForm, create_eventForm, MessageCaptchaForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import (
@@ -26,26 +26,30 @@ def home(request):
     unread_messages = Message.objects.filter(is_read="False").count()
     videos = MyVideo.objects.order_by('-id')[:6]
 
-    # My new way of sending data from the front-end into the database
+    # A new way of sending data from the front-end into the database
     if request.method == "POST":
         data = request.POST
-        
-        form = Message.objects.create(
-            name = data['name'],
-            email = data['email'],
-            subject = data['subject'],
-            body = data['message']
-        )
-        messages.success(request, 'Message sent to Chiké')
+        mc_form = MessageCaptchaForm(request.POST)
+
+        if mc_form.is_valid():
+            form = Message.objects.create(
+                name = data['name'],
+                email = data['email'],
+                subject = data['subject'],
+                body = data['message']
+            )
+            messages.success(request, 'Message sent to Chiké')
+    else:
+        mc_form = MessageCaptchaForm()
 
     context = {
         'posts': posts,
         'events': events,
         'unread_messages': unread_messages,
         'videos': videos,
+        'mc_form': mc_form,
     }
     template = 'net/home.html'
-
     return render(request,  template, context)
 
 

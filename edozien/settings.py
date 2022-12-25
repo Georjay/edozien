@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'storages',
     'embed_video',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -148,5 +149,11 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+PYTHON_RECAPTCHA_PUBLIC_KEY = os.environ.get('PYTHON_RECAPTCHA_PUBLIC_KEY')
+PYTHON_RECAPTCHA_PRIVATE_KEY = os.environ.get('PYTHON_RECAPTCHA_PRIVATE_KEY')
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 django_heroku.settings(locals())
