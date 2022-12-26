@@ -34,7 +34,7 @@ class create_eventForm(ModelForm):
         ]
 
 class MessageCaptchaForm(forms.Form):
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    captcha = ReCaptchaField(widget=ReCaptchaV3)
 
     # Override the __init__(...) method of the form class to define custom label and help_texts
     def __init__(self, *args, **kwargs):
